@@ -4,13 +4,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     await dbConnect();
     const { slug } = await params;
 
-    const shortUrl = await ShortUrl.findOne({ slug });
+    const shortUrl = await ShortUrl.findOne({ slug: slug });
 
     if (!shortUrl) {
       return NextResponse.json(
