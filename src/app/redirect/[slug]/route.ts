@@ -6,13 +6,28 @@ export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  await dbConnect();
-  const { slug } = await params;
-  const Url = await ShortUrl.findOne({ slug });
-  if (!Url)
-    return NextResponse.json({
-      message: "no matching shortid",
-      success: false,
-    });
-  return NextResponse.json({ Url });
+  try {
+    await dbConnect();
+    const { slug } = await params;
+
+    const shortUrl = await ShortUrl.findOne({ slug });
+
+    if (!shortUrl) {
+      return NextResponse.json(
+        { message: "Short URL not found", success: false },
+        { status: 404 }
+      );
+    }
+
+    shortUrl.visitHistory.push(new Date());
+    await shortUrl.save();
+
+    return NextResponse.redirect(shortUrl.originalUrl);
+  } catch (err) {
+    console.error("Redirect error:", err);
+    return NextResponse.json(
+      { message: "Server error", success: false },
+      { status: 500 }
+    );
+  }
 }
