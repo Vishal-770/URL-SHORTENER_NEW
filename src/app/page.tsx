@@ -21,6 +21,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 export default function Home() {
   const features = [
@@ -134,10 +135,12 @@ export default function Home() {
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="px-8">
-                Get Started for Free
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
+              <Link href="/dashboard">
+                <Button size="lg" className="px-8">
+                  Get Started for Free
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
               <Button size="lg" variant="outline" className="px-8">
                 See How It Works
               </Button>
@@ -211,8 +214,8 @@ export default function Home() {
                 Real-time analytics that matter
               </h2>
               <p className="mt-4 text-muted-foreground">
-                Our dashboard gives you instant insights into who's clicking
-                your links and where they're coming from.
+                Our dashboard gives you instant insights into who&#39;s clicking
+                your links and where they&#39;re coming from.
               </p>
 
               <div className="mt-8 space-y-6">
@@ -285,7 +288,7 @@ export default function Home() {
             {testimonials.map((testimonial, index) => (
               <Card key={index}>
                 <CardContent className="pt-6">
-                  <p className="italic">"{testimonial.content}"</p>
+                  <p className="italic">&quot;{testimonial.content}&quot;</p>
                 </CardContent>
                 <CardFooter className="flex items-center gap-4">
                   <Avatar>

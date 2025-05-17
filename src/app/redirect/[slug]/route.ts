@@ -8,7 +8,8 @@ export async function GET(
 ) {
   try {
     await dbConnect();
-    const { slug } = await params;
+    const { id } = await params;
+    const slug = id;
 
     const shortUrl = await ShortUrl.findOne({ slug });
 

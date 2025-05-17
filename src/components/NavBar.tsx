@@ -16,6 +16,7 @@ import { ModeToggle } from "./ui/ModeToggle";
 export default function NavBar() {
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "Dashboard", path: "/dashboard" },
     { name: "Features", path: "/features" },
     { name: "Pricing", path: "/pricing" },
     { name: "About", path: "/about" },
