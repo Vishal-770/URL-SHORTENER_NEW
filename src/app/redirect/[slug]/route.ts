@@ -1,6 +1,7 @@
 import { dbConnect } from "@/database/connection";
 import ShortUrl from "@/database/models/shortUrlmodel";
 import { NextRequest, NextResponse } from "next/server";
+import { UAParser } from "ua-parser-js";
 
 export async function GET(
   req: NextRequest,
@@ -9,9 +10,34 @@ export async function GET(
   try {
     await dbConnect();
     const { slug } = await params;
-    console.log(req);
 
-    const shortUrl = await ShortUrl.findOne({ slug: slug });
+    const ip =
+      req.headers.get("x-forwarded-for") ||
+      req.headers.get("x-real-ip") ||
+      "unknown";
+    const userAgent = req.headers.get("user-agent") || "unknown";
+    const referrer = req.headers.get("referer") || "unknown";
+
+    const parser = new UAParser(userAgent);
+    const deviceType = parser.getDevice().type || "desktop";
+    const browser = parser.getBrowser().name || "unknown";
+    const os = parser.getOS().name || "unknown";
+
+    let locationInfo = "Unknown location";
+
+    try {
+      const res = await fetch(`https://ipapi.co/${ip}/json/`);
+      if (res.ok) {
+        const data = await res.json();
+        if (!data.error) {
+          locationInfo = `${data.city}, ${data.region}, ${data.country_name}`;
+        }
+      }
+    } catch {
+      // Ignore location errors silently
+    }
+
+    const shortUrl = await ShortUrl.findOne({ slug });
 
     if (!shortUrl) {
       return NextResponse.json(
@@ -20,14 +46,26 @@ export async function GET(
       );
     }
 
-    shortUrl.visitHistory.push(new Date());
-    await shortUrl.save();
+    try {
+      shortUrl.visitHistory.push({
+        timestamp: new Date(),
+        ip,
+        deviceType,
+        os,
+        browser,
+        location: locationInfo,
+        referrer,
+        userAgent,
+      });
+      await shortUrl.save();
+    } catch {
+      // Ignore analytics saving failure, continue redirecting
+    }
 
     return NextResponse.redirect(shortUrl.originalUrl);
-  } catch (err) {
-    console.error("Redirect error:", err);
+  } catch {
     return NextResponse.json(
-      { message: "Server error", success: false },
+      { message: "Internal server error", success: false },
       { status: 500 }
     );
   }

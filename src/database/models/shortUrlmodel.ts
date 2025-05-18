@@ -1,14 +1,39 @@
 import mongoose, { Document, Schema } from "mongoose";
 
+export interface IVisitEntry {
+  timestamp: Date;
+  ip: string;
+  deviceType: string;
+  os: string;
+  browser: string;
+  location: string;
+  referrer: string;
+  userAgent: string;
+}
+
 export interface IShortUrl extends Document {
   originalUrl: string;
   slug: string;
   userId: mongoose.Types.ObjectId;
-  visitHistory: Date[];
+  visitHistory: IVisitEntry[];
   createdAt: Date;
   qrCode: string;
   updatedAt: Date;
 }
+
+const VisitEntrySchema = new Schema<IVisitEntry>(
+  {
+    timestamp: { type: Date, default: Date.now },
+    ip: { type: String },
+    deviceType: { type: String },
+    os: { type: String },
+    browser: { type: String },
+    location: { type: String },
+    referrer: { type: String },
+    userAgent: { type: String },
+  },
+  { _id: false }
+);
 
 const ShortUrlSchema = new Schema<IShortUrl>(
   {
@@ -27,7 +52,7 @@ const ShortUrlSchema = new Schema<IShortUrl>(
       required: true,
     },
     visitHistory: {
-      type: [Date],
+      type: [VisitEntrySchema],
       default: [],
     },
     qrCode: {
@@ -36,12 +61,13 @@ const ShortUrlSchema = new Schema<IShortUrl>(
     },
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt
+    timestamps: true,
   }
 );
 
-// Prevent model overwrite issues in dev with Next.js
+// Prevent model overwrite in development
 const ShortUrl =
   mongoose.models.ShortUrl ||
   mongoose.model<IShortUrl>("ShortUrl", ShortUrlSchema);
+
 export default ShortUrl;
