@@ -52,18 +52,15 @@ const URLInput = () => {
       transition={{ duration: 0.5, delay: 0.1 }}
       className="w-full"
     >
-      <Card className="p-4 sm:p-6">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-3 sm:space-y-4"
-        >
+      <Card className="p-4 sm:p-6 max-w-2xl mx-auto">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full">
               <Input
                 type="text"
                 placeholder="https://your-long-url.com/with/many/parameters"
                 disabled={!isLoaded || createMutation.status === "pending"}
-                className="flex-1 min-w-0 h-12 sm:h-10" // Adjusted heights
+                className="w-full sm:flex-1 h-12 text-sm"
                 {...register("originalUrl", {
                   required: "URL is required",
                   pattern: {
@@ -78,16 +75,16 @@ const URLInput = () => {
                 disabled={
                   !isLoaded || createMutation.status === "pending" || !isValid
                 }
-                className="w-full sm:w-auto flex-shrink-0 h-12 sm:h-10" // Match button height
+                className="h-12 sm:w-auto w-full"
               >
                 {createMutation.status === "pending" ? (
                   <>
-                    <Loader2 className="mr-1 sm:mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     <span className="truncate">Shortening...</span>
                   </>
                 ) : (
                   <>
-                    <Plus className="mr-1 sm:mr-2 h-4 w-4" />
+                    <Plus className="mr-2 h-4 w-4" />
                     <span className="truncate">Shorten URL</span>
                   </>
                 )}

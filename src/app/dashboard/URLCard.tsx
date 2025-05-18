@@ -1,18 +1,25 @@
 import { Card } from "@/components/ui/card";
+
 import { BarChart2, Check, Copy, ExternalLink, Link2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import DeleteButton from "./DeleteButton";
+
+import Qrcode from "./Qrcode";
+
 interface URL {
   _id: string;
   originalUrl: string;
   slug: string;
+  qrCode: string;
   visitHistory?: { date: string }[];
   createdAt: string;
 }
+
 const URLCard = ({ url }: { url: URL }) => {
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopiedSlug(text);
@@ -21,10 +28,12 @@ const URLCard = ({ url }: { url: URL }) => {
       className: "bg-success text-success-foreground border-border",
     });
   };
+
   return (
     <Card className="p-5 group hover:border-primary/50 transition-all duration-300">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div className="space-y-2.5 flex-1 min-w-0">
+          {/* existing URL info here */}
           <div className="flex items-center gap-2">
             <Link2 className="h-4 w-4 text-muted-foreground flex-shrink-0" />
             <a
@@ -74,7 +83,11 @@ const URLCard = ({ url }: { url: URL }) => {
             </span>
           </div>
         </div>
-        <DeleteButton slug={url.slug} />
+        <div className="flex items-center gap-2">
+          <Qrcode qrCode={url.qrCode} />
+
+          <DeleteButton slug={url.slug} />
+        </div>
       </div>
     </Card>
   );

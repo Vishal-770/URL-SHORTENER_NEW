@@ -9,6 +9,7 @@ export async function GET(
   try {
     await dbConnect();
     const { slug } = await params;
+    console.log(req);
 
     const shortUrl = await ShortUrl.findOne({ slug: slug });
 

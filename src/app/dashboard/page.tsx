@@ -19,6 +19,7 @@ interface URL {
   _id: string;
   originalUrl: string;
   slug: string;
+  qrCode: string;
   visitHistory?: { date: string }[];
   createdAt: string;
 }

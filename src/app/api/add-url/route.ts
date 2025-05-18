@@ -3,6 +3,7 @@ import User from "@/database/models/usermodel";
 import { NextRequest, NextResponse } from "next/server";
 import { nanoid } from "nanoid";
 import ShortUrl from "@/database/models/shortUrlmodel";
+import QRCode from "qrcode";
 
 interface reqBody {
   originalUrl: string;
@@ -33,10 +34,20 @@ export async function POST(request: NextRequest) {
 
     const slug = nanoid(8);
     const userId = user._id;
+    const shortUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/${slug}`;
+    const qrCode = await QRCode.toDataURL(shortUrl);
 
-    const newUrl = await ShortUrl.create({ originalUrl, slug, userId });
+    const newUrl = await ShortUrl.create({
+      originalUrl,
+      slug,
+      userId,
+      qrCode: qrCode,
+    });
 
-    return NextResponse.json({ success: true, data: newUrl }, { status: 201 });
+    return NextResponse.json(
+      { success: true, data: newUrl.toObject() },
+      { status: 201 }
+    );
   } catch (err) {
     console.error("Error occurred:", err);
     return NextResponse.json(

@@ -6,6 +6,7 @@ export interface IShortUrl extends Document {
   userId: mongoose.Types.ObjectId;
   visitHistory: Date[];
   createdAt: Date;
+  qrCode: string;
   updatedAt: Date;
 }
 
@@ -28,6 +29,10 @@ const ShortUrlSchema = new Schema<IShortUrl>(
     visitHistory: {
       type: [Date],
       default: [],
+    },
+    qrCode: {
+      type: String,
+      required: true,
     },
   },
   {
