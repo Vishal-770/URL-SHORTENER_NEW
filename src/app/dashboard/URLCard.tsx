@@ -53,6 +53,7 @@ const URLCard = ({ url }: { url: URL }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium hover:underline text-primary truncate"
+              prefetch={false}
             >
               {`${process.env.NEXT_PUBLIC_BASE_URL}/redirect/${url.slug}`}
             </Link>
