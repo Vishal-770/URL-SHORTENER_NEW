@@ -6,7 +6,7 @@ export interface IVisitEntry {
   deviceType: string;
   os: string;
   browser: string;
-  location: string;
+  
   referrer: string;
   userAgent: string;
 }
@@ -28,7 +28,7 @@ const VisitEntrySchema = new Schema<IVisitEntry>(
     deviceType: { type: String },
     os: { type: String },
     browser: { type: String },
-    location: { type: String },
+
     referrer: { type: String },
     userAgent: { type: String },
   },

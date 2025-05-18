@@ -23,20 +23,6 @@ export async function GET(
     const browser = parser.getBrowser().name || "unknown";
     const os = parser.getOS().name || "unknown";
 
-    let locationInfo = "Unknown location";
-
-    try {
-      const res = await fetch(`https://ipapi.co/${ip}/json/`);
-      if (res.ok) {
-        const data = await res.json();
-        if (!data.error) {
-          locationInfo = `${data.city}, ${data.region}, ${data.country_name}`;
-        }
-      }
-    } catch {
-      // Ignore location errors silently
-    }
-
     const shortUrl = await ShortUrl.findOne({ slug });
 
     if (!shortUrl) {
@@ -53,7 +39,6 @@ export async function GET(
         deviceType,
         os,
         browser,
-        location: locationInfo,
         referrer,
         userAgent,
       });
