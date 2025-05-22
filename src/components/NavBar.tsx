@@ -23,67 +23,100 @@ export default function NavBar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Logo - Improved spacing */}
+        <Link 
+          href="/" 
+          className="flex items-center gap-2 transition-opacity hover:opacity-80"
+        >
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
             <span className="font-bold text-primary-foreground">LS</span>
           </div>
-          <span className="font-bold text-lg">LinkShort</span>
+          <span className="text-lg font-bold tracking-tight">LinkShort</span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Desktop Nav - Better spacing and hover effects */}
+        <nav className="hidden items-center space-x-6 md:flex lg:space-x-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.path}
-              className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+              className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground hover:underline hover:underline-offset-4"
             >
               {link.name}
             </Link>
           ))}
         </nav>
 
-        {/* Controls */}
-        <div className="flex items-center gap-3 md:gap-4">
-          <ModeToggle />
+        {/* Controls - Better mobile spacing */}
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+          <div className="hidden sm:block">
+            <ModeToggle />
+          </div>
 
           <SignedOut>
             <SignInButton mode="modal">
-              <Button variant="default" size="sm">
+              <Button 
+                variant="default" 
+                size="sm"
+                className="hidden sm:inline-flex"
+              >
                 Sign In
               </Button>
             </SignInButton>
           </SignedOut>
 
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton 
+              afterSignOutUrl="/" 
+              appearance={{
+                elements: {
+                  avatarBox: "h-8 w-8",
+                }
+              }}
+            />
           </SignedIn>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu - Improved styling */}
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="sm:hidden"
+              >
                 <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[260px] sm:w-[300px]">
+            <SheetContent side="right" className="w-[280px] sm:w-[320px]">
               <SheetHeader className="text-left">
-                <SheetTitle className="text-xl font-bold">Menu</SheetTitle>
+                <SheetTitle className="text-2xl font-bold">Menu</SheetTitle>
               </SheetHeader>
-              <nav className="mt-6 flex flex-col gap-3">
+              <nav className="mt-8 flex flex-col space-y-2">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.path}
-                    className="w-full px-4 py-2 text-left text-sm font-medium text-foreground hover:bg-accent rounded-md transition-colors"
+                    className="w-full rounded-md px-4 py-3 text-left text-base font-medium text-foreground transition-colors hover:bg-accent"
                   >
                     {link.name}
                   </Link>
                 ))}
               </nav>
+              <div className="mt-8 flex flex-col space-y-3">
+                <div className="px-4">
+                  <ModeToggle />
+                </div>
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <Button variant="default" className="w-full">
+                      Sign In
+                    </Button>
+                  </SignInButton>
+                </SignedOut>
+              </div>
             </SheetContent>
           </Sheet>
         </div>

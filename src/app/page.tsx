@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowRight,
   Rocket,
@@ -16,12 +18,12 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const features = [
@@ -115,10 +117,10 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex-1">
+    <main className="w-full">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="container px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40">
+      <section className="w-full relative overflow-hidden bg-gradient-to-b from-background/50 to-muted/50">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40">
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">
               <Rocket className="h-4 w-4 mr-2" />
@@ -150,12 +152,12 @@ export default function Home() {
       </section>
 
       {/* Logo Cloud */}
-      <section className="py-12 bg-muted/50">
-        <div className="container px-4 sm:px-6 lg:px-8">
+      <section className="w-full py-12 bg-muted/50">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm text-muted-foreground mb-8">
             TRUSTED BY INDUSTRY LEADERS
           </p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-12">
             {[
               "TechCorp",
               "StartUp Inc",
@@ -175,8 +177,8 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20">
-        <div className="container px-4 sm:px-6 lg:px-8">
+      <section className="w-full py-20">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight">
               Everything you need to optimize your links
@@ -187,9 +189,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 sm:px-0">
             {features.map((feature, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+              <Card
+                key={index}
+                className="hover:shadow-lg transition-shadow h-full"
+              >
                 <CardHeader>
                   <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary/10 mb-4">
                     {feature.icon}
@@ -206,10 +211,10 @@ export default function Home() {
       </section>
 
       {/* Demo Section */}
-      <section className="py-20 bg-muted/50">
-        <div className="container px-4 sm:px-6 lg:px-8">
+      <section className="w-full py-20 bg-muted/50">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="px-4 sm:px-0">
               <h2 className="text-3xl font-bold tracking-tight">
                 Real-time analytics that matter
               </h2>
@@ -246,9 +251,7 @@ export default function Home() {
                 </TabsList>
                 <TabsContent value="clicks" className="mt-6">
                   <div className="h-64 bg-muted rounded-md flex items-center justify-center">
-                    <p className="text-muted-foreground">
-                      Clicks chart visualization
-                    </p>
+             <Image  src="/homepageimage1.png" width={100} height={100} alt="image" className="w-full h-full"  />
                   </div>
                 </TabsContent>
                 <TabsContent value="locations" className="mt-6">
@@ -272,8 +275,8 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20">
-        <div className="container px-4 sm:px-6 lg:px-8">
+      <section className="w-full py-20">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight">
               Loved by marketers worldwide
@@ -284,9 +287,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 sm:px-0">
             {testimonials.map((testimonial, index) => (
-              <Card key={index}>
+              <Card key={index} className="h-full">
                 <CardContent className="pt-6">
                   <p className="italic">&quot;{testimonial.content}&quot;</p>
                 </CardContent>
@@ -309,8 +312,8 @@ export default function Home() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20 bg-muted/50">
-        <div className="container px-4 sm:px-6 lg:px-8">
+      <section className="w-full py-20 bg-muted/50">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight">
               Simple, transparent pricing
@@ -320,13 +323,13 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 sm:px-0">
             {pricingPlans.map((plan, index) => (
               <Card
                 key={index}
-                className={
-                  plan.popular ? "ring-2 ring-primary relative" : "relative"
-                }
+                className={`h-full ${
+                  plan.popular ? "ring-2 ring-primary" : ""
+                }`}
               >
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -367,8 +370,8 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary">
-        <div className="container px-4 sm:px-6 lg:px-8">
+      <section className="w-full py-20 bg-primary">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold tracking-tight text-primary-foreground">
               Ready to transform your links?
@@ -383,7 +386,7 @@ export default function Home() {
                 Get Started for Free
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
-              <Button size="lg" variant="secondary" className="px-8 ">
+              <Button size="lg" variant="secondary" className="px-8">
                 Contact Sales
               </Button>
             </div>

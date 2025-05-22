@@ -8,6 +8,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@/components/Footer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
+import { LoadingBarProvider } from "@/components/Layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
+            <LoadingBarProvider />
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -43,7 +45,7 @@ export default function RootLayout({
               {children}
               <Footer />
             </ThemeProvider>
-              <Toaster position="bottom-right" richColors />
+            <Toaster position="bottom-right" richColors />
           </body>
         </html>
       </ClerkProvider>
