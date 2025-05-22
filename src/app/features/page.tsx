@@ -5,15 +5,15 @@ import {
   Rocket,
   BarChart2,
   Lock,
-  Zap,
+ 
   Globe,
-  CheckCircle,
+
   Link as LinkIcon,
   QrCode,
   Gauge,
-  Cpu,
+ 
   Shield,
-  Calendar,
+ 
   Smartphone,
   Monitor,
   Tablet,

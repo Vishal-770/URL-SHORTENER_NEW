@@ -1,9 +1,7 @@
 "use client";
 
 import {
-  Users,
   Globe2,
-  BarChart,
   Shield,
   Rocket,
   HeartHandshake,
@@ -137,7 +135,7 @@ export default function AboutPage() {
                   the rest is history.
                 </p>
                 <p>
-                  Today, we're a fully remote team spanning 8 countries, united
+                  Today, we&#39;re a fully remote team spanning 8 countries, united
                   by our passion for building tools that make the web work
                   better.
                 </p>
@@ -164,7 +162,7 @@ export default function AboutPage() {
           <div className="max-w-2xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight">Meet our team</h2>
             <p className="mt-4 text-muted-foreground">
-              The brilliant minds behind LinkShort's success
+              The brilliant minds behind LinkShort&#39;s success
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -173,7 +171,9 @@ export default function AboutPage() {
                 <CardHeader className="items-center text-center">
                   <Avatar className="h-24 w-24 mb-4">
                     <AvatarImage src={member.avatar} />
-                    <AvatarFallback className="mx-auto">{member.name[0]}</AvatarFallback>
+                    <AvatarFallback className="mx-auto">
+                      {member.name[0]}
+                    </AvatarFallback>
                   </Avatar>
                   <CardTitle>{member.name}</CardTitle>
                   <CardDescription>{member.role}</CardDescription>

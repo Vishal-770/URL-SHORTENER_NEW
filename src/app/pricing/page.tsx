@@ -4,9 +4,6 @@ import {
   ArrowRight,
   Check,
   CheckCircle,
-  ChevronDown,
-  Globe,
-  HelpCircle,
   Rocket,
   Sparkles,
   Zap,
@@ -21,23 +18,19 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
+
 import { motion } from "framer-motion";
-import { Separator } from "@/components/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 
 export default function PricingPage() {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
-  const [activeTab, setActiveTab] = useState<"individual" | "team" | "enterprise">(
-    "individual"
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">(
+    "monthly"
   );
+  const [activeTab, setActiveTab] = useState<
+    "individual" | "team" | "enterprise"
+  >("individual");
 
   const pricingPlans = {
     individual: [
@@ -284,7 +277,8 @@ export default function PricingPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto"
             >
-              Choose the perfect plan for your needs. Start for free, upgrade as you grow.
+              Choose the perfect plan for your needs. Start for free, upgrade as
+              you grow.
             </motion.p>
           </div>
         </div>
@@ -292,57 +286,67 @@ export default function PricingPage() {
 
       {/* Billing Toggle */}
       <section className="w-full py-12 bg-muted/50">
-  <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
-    <div className="flex flex-col items-center text-center">
-      <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-        <span className="font-medium text-sm sm:text-base">Monthly</span>
+        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+              <span className="font-medium text-sm sm:text-base">Monthly</span>
 
-        <Button
-          variant="outline"
-          size="sm"
-          className="relative overflow-hidden rounded-full border border-primary px-0 w-40 h-8"
-          onClick={() =>
-            setBillingCycle(billingCycle === "monthly" ? "annual" : "monthly")
-          }
-        >
-          <span
-            className={`absolute top-0.5 left-0.5 h-7 w-1/2 rounded-full bg-primary transition-transform duration-300 ease-in-out ${
-              billingCycle === "annual" ? "translate-x-full" : "translate-x-0"
-            }`}
-          />
-          <div className="relative z-10 flex w-full justify-between text-sm font-medium">
-            <span
-              className={`w-1/2 text-center transition-colors ${
-                billingCycle === "monthly" ? "text-primary-foreground" : "text-muted-foreground"
-              }`}
-            >
-              Monthly
-            </span>
-            <span
-              className={`w-1/2 text-center transition-colors ${
-                billingCycle === "annual" ? "text-primary-foreground" : "text-muted-foreground"
-              }`}
-            >
-              Annual
-            </span>
+              <Button
+                variant="outline"
+                size="sm"
+                className="relative overflow-hidden rounded-full border border-primary px-0 w-40 h-8"
+                onClick={() =>
+                  setBillingCycle(
+                    billingCycle === "monthly" ? "annual" : "monthly"
+                  )
+                }
+              >
+                <span
+                  className={`absolute top-0.5 left-0.5 h-7 w-1/2 rounded-full bg-primary transition-transform duration-300 ease-in-out ${
+                    billingCycle === "annual"
+                      ? "translate-x-full"
+                      : "translate-x-0"
+                  }`}
+                />
+                <div className="relative z-10 flex w-full justify-between text-sm font-medium">
+                  <span
+                    className={`w-1/2 text-center transition-colors ${
+                      billingCycle === "monthly"
+                        ? "text-primary-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    Monthly
+                  </span>
+                  <span
+                    className={`w-1/2 text-center transition-colors ${
+                      billingCycle === "annual"
+                        ? "text-primary-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    Annual
+                  </span>
+                </div>
+              </Button>
+
+              <span className="font-medium text-sm sm:text-base">Annual</span>
+
+              <Badge
+                variant="secondary"
+                className="ml-0 sm:ml-2 flex items-center space-x-1 px-2 py-1"
+              >
+                <Sparkles className="h-4 w-4" />
+                <span className="text-xs font-semibold">Save 20%</span>
+              </Badge>
+            </div>
+
+            <p className="mt-4 text-sm text-muted-foreground">
+              Switch between monthly and annual billing
+            </p>
           </div>
-        </Button>
-
-        <span className="font-medium text-sm sm:text-base">Annual</span>
-
-        <Badge variant="secondary" className="ml-0 sm:ml-2 flex items-center space-x-1 px-2 py-1">
-          <Sparkles className="h-4 w-4" />
-          <span className="text-xs font-semibold">Save 20%</span>
-        </Badge>
-      </div>
-
-      <p className="mt-4 text-sm text-muted-foreground">
-        Switch between monthly and annual billing
-      </p>
-    </div>
-  </div>
-</section>
-
+        </div>
+      </section>
 
       {/* Pricing Tabs */}
       <section className="w-full py-12">
@@ -385,7 +389,9 @@ export default function PricingPage() {
                       <CardHeader>
                         <CardTitle>{plan.name}</CardTitle>
                         <div className="flex items-baseline gap-2 mt-2">
-                          <span className="text-4xl font-bold">{plan.price}</span>
+                          <span className="text-4xl font-bold">
+                            {plan.price}
+                          </span>
                           {plan.price !== "$0" && plan.price !== "Custom" && (
                             <span className="text-muted-foreground">
                               /{billingCycle === "annual" ? "year" : "month"}
@@ -440,7 +446,9 @@ export default function PricingPage() {
                       <CardHeader>
                         <CardTitle>{plan.name}</CardTitle>
                         <div className="flex items-baseline gap-2 mt-2">
-                          <span className="text-4xl font-bold">{plan.price}</span>
+                          <span className="text-4xl font-bold">
+                            {plan.price}
+                          </span>
                           {plan.price !== "Custom" && (
                             <span className="text-muted-foreground">
                               /{billingCycle === "annual" ? "year" : "month"}
@@ -495,7 +503,9 @@ export default function PricingPage() {
                       <CardHeader>
                         <CardTitle>{plan.name}</CardTitle>
                         <div className="flex items-baseline gap-2 mt-2">
-                          <span className="text-4xl font-bold">{plan.price}</span>
+                          <span className="text-4xl font-bold">
+                            {plan.price}
+                          </span>
                         </div>
                         <CardDescription>{plan.description}</CardDescription>
                       </CardHeader>
