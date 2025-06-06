@@ -8,14 +8,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 
@@ -25,33 +19,6 @@ export default function AboutPage() {
     { value: "150K+", label: "Active users" },
     { value: "12", label: "Global locations" },
     { value: "99.9%", label: "Uptime" },
-  ];
-
-  const team = [
-    {
-      name: "Alex Johnson",
-      role: "Founder & CEO",
-      bio: "Former Google engineer with 10+ years in web infrastructure",
-      avatar: "/team/alex.jpg",
-    },
-    {
-      name: "Maria Chen",
-      role: "CTO",
-      bio: "Specialist in distributed systems and edge computing",
-      avatar: "/team/maria.jpg",
-    },
-    {
-      name: "Sam Wilson",
-      role: "Head of Growth",
-      bio: "Growth marketing expert with focus on developer tools",
-      avatar: "/team/sam.jpg",
-    },
-    {
-      name: "Taylor Smith",
-      role: "UX Lead",
-      bio: "Designer focused on creating intuitive analytics experiences",
-      avatar: "/team/taylor.jpg",
-    },
   ];
 
   const values = [
@@ -135,9 +102,9 @@ export default function AboutPage() {
                   the rest is history.
                 </p>
                 <p>
-                  Today, we&#39;re a fully remote team spanning 8 countries, united
-                  by our passion for building tools that make the web work
-                  better.
+                  Today, we&#39;re a fully remote team spanning 8 countries,
+                  united by our passion for building tools that make the web
+                  work better.
                 </p>
               </div>
               <Button className="mt-8" asChild>
@@ -152,37 +119,6 @@ export default function AboutPage() {
                 Company timeline visualization
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="w-full py-20 bg-muted/50">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight">Meet our team</h2>
-            <p className="mt-4 text-muted-foreground">
-              The brilliant minds behind LinkShort&#39;s success
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader className="items-center text-center">
-                  <Avatar className="h-24 w-24 mb-4">
-                    <AvatarImage src={member.avatar} />
-                    <AvatarFallback className="mx-auto">
-                      {member.name[0]}
-                    </AvatarFallback>
-                  </Avatar>
-                  <CardTitle>{member.name}</CardTitle>
-                  <CardDescription>{member.role}</CardDescription>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <p className="text-muted-foreground">{member.bio}</p>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>

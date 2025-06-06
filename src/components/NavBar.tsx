@@ -25,9 +25,9 @@ export default function NavBar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo - Improved spacing */}
-        <Link 
-          href="/" 
+        {/* Left: Logo */}
+        <Link
+          href="/"
           className="flex items-center gap-2 transition-opacity hover:opacity-80"
         >
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
@@ -36,7 +36,7 @@ export default function NavBar() {
           <span className="text-lg font-bold tracking-tight">LinkShort</span>
         </Link>
 
-        {/* Desktop Nav - Better spacing and hover effects */}
+        {/* Center: Desktop Nav */}
         <nav className="hidden items-center space-x-6 md:flex lg:space-x-8">
           {navLinks.map((link) => (
             <Link
@@ -49,43 +49,33 @@ export default function NavBar() {
           ))}
         </nav>
 
-        {/* Controls - Better mobile spacing */}
+        {/* Right: Always-visible Controls */}
         <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-          <div className="hidden sm:block">
-            <ModeToggle />
-          </div>
+          <ModeToggle />
 
           <SignedOut>
             <SignInButton mode="modal">
-              <Button 
-                variant="default" 
-                size="sm"
-                className="hidden sm:inline-flex"
-              >
+              <Button variant="default" size="sm">
                 Sign In
               </Button>
             </SignInButton>
           </SignedOut>
 
           <SignedIn>
-            <UserButton 
-              afterSignOutUrl="/" 
+            <UserButton
+              afterSignOutUrl="/"
               appearance={{
                 elements: {
                   avatarBox: "h-8 w-8",
-                }
+                },
               }}
             />
           </SignedIn>
 
-          {/* Mobile Menu - Improved styling */}
+          {/* Mobile Nav Sheet (only menu links) */}
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="sm:hidden"
-              >
+              <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
@@ -105,18 +95,6 @@ export default function NavBar() {
                   </Link>
                 ))}
               </nav>
-              <div className="mt-8 flex flex-col space-y-3">
-                <div className="px-4">
-                  <ModeToggle />
-                </div>
-                <SignedOut>
-                  <SignInButton mode="modal">
-                    <Button variant="default" className="w-full">
-                      Sign In
-                    </Button>
-                  </SignInButton>
-                </SignedOut>
-              </div>
             </SheetContent>
           </Sheet>
         </div>
