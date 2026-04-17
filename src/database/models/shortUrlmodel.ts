@@ -9,6 +9,14 @@ export interface IVisitEntry {
   
   referrer: string;
   userAgent: string;
+  country?: string;
+  city?: string;
+  region?: string;
+  timezone?: string;
+  isBot?: boolean;
+  language?: string;
+  visitorId?: string;
+  referringDomain?: string;
 }
 
 export interface IShortUrl extends Document {
@@ -18,6 +26,7 @@ export interface IShortUrl extends Document {
   visitHistory: IVisitEntry[];
   createdAt: Date;
   qrCode: string;
+  qrOptions?: any;
   updatedAt: Date;
 }
 
@@ -31,6 +40,14 @@ const VisitEntrySchema = new Schema<IVisitEntry>(
 
     referrer: { type: String },
     userAgent: { type: String },
+    country: { type: String },
+    city: { type: String },
+    region: { type: String },
+    timezone: { type: String },
+    isBot: { type: Boolean, default: false },
+    language: { type: String },
+    visitorId: { type: String },
+    referringDomain: { type: String },
   },
   { _id: false }
 );
@@ -58,6 +75,10 @@ const ShortUrlSchema = new Schema<IShortUrl>(
     qrCode: {
       type: String,
       required: true,
+    },
+    qrOptions: {
+      type: Schema.Types.Mixed,
+      default: null,
     },
   },
   {
