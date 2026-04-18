@@ -19,6 +19,8 @@ export interface IVisitEntry {
   language?: string;
   visitorId?: string;
   referringDomain?: string;
+  latitude?: string;
+  longitude?: string;
 }
 
 export interface IShortUrl extends Document {
@@ -50,6 +52,8 @@ const VisitEntrySchema = new Schema<IVisitEntry>(
     language: { type: String },
     visitorId: { type: String },
     referringDomain: { type: String },
+    latitude: { type: String },
+    longitude: { type: String },
   },
   { _id: false }
 );

@@ -166,13 +166,19 @@
     @apply bg-background text-foreground antialiased font-sans;
     background-image: none; /* Removed fancy gradients */
   }
+  .maplibregl-popup-content {
+    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+  }
+  .maplibregl-popup-tip {
+    @apply hidden!;
+  }
 }
 
 @layer utilities {
   .page-shell {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
-  
+
   /* Modern clean surfaces - minimal shadows */
   .surface-panel {
     @apply border bg-card text-card-foreground shadow-sm;

@@ -44,6 +44,8 @@ export async function GET(
       const city = req.headers.get("x-vercel-ip-city") || "unknown";
       const region = req.headers.get("x-vercel-ip-country-region") || "unknown";
       const timezone = req.headers.get("x-vercel-ip-timezone") || "unknown";
+      const latitude = req.headers.get("x-vercel-ip-latitude") || "unknown";
+      const longitude = req.headers.get("x-vercel-ip-longitude") || "unknown";
       
       // Clean Referring Domain
       let referringDomain = "Direct";
@@ -79,6 +81,8 @@ export async function GET(
         language,
         visitorId,
         referringDomain,
+        latitude,
+        longitude,
       });
       await shortUrl.save();
     } catch (error) {

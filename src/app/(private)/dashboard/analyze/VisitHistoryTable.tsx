@@ -15,7 +15,8 @@ import {
   Link2, 
   ChevronLeft, 
   ChevronRight,
-  Loader2 
+  Loader2,
+  Navigation
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -27,6 +28,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { getPaginatedHistory } from "./actions";
 import { toast } from "sonner";
+import { MapModal } from "@/components/MapModal";
 
 interface VisitEntry {
   timestamp: Date;
@@ -42,6 +44,8 @@ interface VisitEntry {
   timezone?: string;
   isBot?: boolean;
   language?: string;
+  latitude?: string;
+  longitude?: string;
 }
 
 const VisitHistoryTable = ({ slug, initialTotal }: { slug: string; initialTotal: number }) => {
@@ -50,6 +54,9 @@ const VisitHistoryTable = ({ slug, initialTotal }: { slug: string; initialTotal:
   const [totalPages, setTotalPages] = useState(Math.ceil(initialTotal / 10));
   const [isLoading, setIsLoading] = useState(true);
   const [total, setTotal] = useState(initialTotal);
+  
+  // Map Modal State
+  const [selectedVisit, setSelectedVisit] = useState<VisitEntry | null>(null);
 
   const fetchPage = useCallback(async (pageNum: number) => {
     try {
@@ -154,14 +161,27 @@ const VisitHistoryTable = ({ slug, initialTotal }: { slug: string; initialTotal:
                     )}
                   </TableCell>
                   <TableCell className="py-4">
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[11px] font-bold tracking-tight text-foreground/90">
-                         {entry.country || "Unknown"}
-                      </span>
-                      <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-40 flex items-center gap-1">
-                         <MapPin className="h-2.5 w-2.5" />
-                         {entry.city || "Direct"}
-                      </span>
+                    <div className="flex items-center justify-between group/map">
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[11px] font-bold tracking-tight text-foreground/90">
+                           {entry.country || "Unknown"}
+                        </span>
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-40 flex items-center gap-1">
+                           <MapPin className="h-2.5 w-2.5" />
+                           {entry.city || "Direct"}
+                        </span>
+                      </div>
+                      
+                      {entry.latitude && entry.latitude !== "unknown" && (
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-7 w-7 rounded-full opacity-0 group-hover/map:opacity-100 transition-opacity hover:bg-secondary/10 hover:text-secondary"
+                          onClick={() => setSelectedVisit(entry)}
+                        >
+                          <Navigation className="h-3 w-3" />
+                        </Button>
+                      )}
                     </div>
                   </TableCell>
                   <TableCell className="py-4">
@@ -214,15 +234,25 @@ const VisitHistoryTable = ({ slug, initialTotal }: { slug: string; initialTotal:
             </TableBody>
           </Table>
           
-          <div className="pt-8 text-center">
-             <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/30">
-                End of current synchronization set • Total records: {total}
-             </p>
-          </div>
+        <div className="pt-8 text-center">
+           <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/30">
+              End of current synchronization set • Total records: {total}
+           </p>
         </div>
+
+        {/* Map Visualization Modal */}
+        <MapModal 
+          isOpen={!!selectedVisit}
+          onClose={() => setSelectedVisit(null)}
+          latitude={selectedVisit?.latitude || 0}
+          longitude={selectedVisit?.longitude || 0}
+          city={selectedVisit?.city}
+          country={selectedVisit?.country}
+        />
       </div>
-    </TooltipProvider>
-  );
+    </div>
+  </TooltipProvider>
+);
 };
 
 export default VisitHistoryTable;
