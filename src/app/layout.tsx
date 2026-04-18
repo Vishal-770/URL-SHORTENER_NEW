@@ -1,11 +1,7 @@
-"use client";
-
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "sonner";
-import { LoadingBarProvider } from "@/components/Layout";
+import { ClientProviders } from "@/components/providers/ClientProviders";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +13,41 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const queryClient = new QueryClient();
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
+
+export const metadata: Metadata = {
+  title: {
+    default: "LinkLayer | Professional URL Shortener & QR Engine",
+    template: "%s | LinkLayer",
+  },
+  description: "Advanced link management platform. Shorten URLs, generate high-resolution custom QR codes, and track audience analytics in real-time.",
+  keywords: ["URL Shortener", "QR Code Generator", "Link Analytics", "Branded Links", "Marketing Tools"],
+  authors: [{ name: "LinkLayer Team" }],
+  creator: "LinkLayer",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://link-layer.vercel.app",
+    title: "LinkLayer | Professional URL Shortener",
+    description: "Lightning-fast URL redirection and custom QR code design for modern teams.",
+    siteName: "LinkLayer",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LinkLayer | Professional URL Shortener",
+    description: "Lightning-fast URL redirection and custom QR code design for modern teams.",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -25,23 +55,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <LoadingBarProvider />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-          <Toaster position="bottom-right" richColors />
-        </body>
-      </html>
-    </QueryClientProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-secondary/30 selection:text-secondary`}
+      >
+        <ClientProviders>
+          {children}
+        </ClientProviders>
+      </body>
+    </html>
   );
 }
