@@ -11,10 +11,10 @@ export function BrandLogo({ className, compact = false }: BrandLogoProps) {
   return (
     <Link
       href="/"
-      className={cn("inline-flex items-center gap-3", className)}
+      className={cn("inline-flex items-center gap-3 group/logo", className)}
       aria-label="LinkLayer home"
     >
-      <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl transition-transform hover:scale-105 active:scale-95">
+      <div className="relative h-9 w-9">
         <Image 
           src="/logo.png" 
           alt="LinkLayer Logo" 
@@ -23,16 +23,16 @@ export function BrandLogo({ className, compact = false }: BrandLogoProps) {
           priority
         />
       </div>
-      {!compact && (
-        <span className="flex flex-col leading-none">
-          <span className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            LinkLayer
-          </span>
-          <span className="text-base font-semibold text-foreground">
-            URL Infrastructure
-          </span>
+      <div className="flex flex-col leading-none">
+        <span className="text-[14px] font-black uppercase tracking-[0.2em] text-foreground group-hover/logo:text-primary transition-colors">
+          LinkLayer
         </span>
-      )}
+        {!compact && (
+          <span className="text-[8px] font-black text-muted-foreground uppercase tracking-[0.3em] mt-0.5">
+            Core Infrastructure
+          </span>
+        )}
+      </div>
     </Link>
   );
 }

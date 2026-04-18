@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import VisitHistoryTable from "./VisitHistoryTable";
 import LineChartGraph from "./LineChart";
+import HeatmapChart from "./HeatmapChart";
 
 interface VisitEntry {
   timestamp: Date;
@@ -161,6 +162,34 @@ const Page = async ({
 
   const lineChartData = processDataForLine();
 
+  const processDataForHeatmap = () => {
+    // 7 days x 24 hours grid [dayIndex][hour]
+    const matrix: number[][] = Array.from({ length: 7 }, () => Array(24).fill(0));
+    
+    fullHistory.forEach((visit) => {
+      const date = new Date(visit.timestamp);
+      const day = date.getDay(); // 0 (Sun) to 6 (Sat)
+      const hour = date.getHours(); // 0 to 23
+      matrix[day][hour]++;
+    });
+
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const flatData = [];
+    
+    for (let d = 0; d < 7; d++) {
+      for (let h = 0; h < 24; h++) {
+        flatData.push({
+          day: days[d],
+          hour: h,
+          value: matrix[d][h]
+        });
+      }
+    }
+    return flatData;
+  };
+
+  const heatmapData = processDataForHeatmap();
+
   return (
     <div className="space-y-10 pb-24">
       {/* Smart Nav & Header */}
@@ -232,6 +261,11 @@ const Page = async ({
                    <LineChartGraph data={lineChartData} title="" description="" />
                 </div>
              </div>
+          </div>
+
+          {/* Precision Engagement Matrix: Heatmap */}
+          <div className="pt-8">
+             <HeatmapChart data={heatmapData} />
           </div>
 
           {/* Audience Breakdown Matrix */}

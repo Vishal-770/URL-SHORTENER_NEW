@@ -27,9 +27,9 @@ const GridBackground = () => (
 );
 
 const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: LucideIcon; label: string }) => (
-  <Button asChild variant="outline" className="h-12 rounded-xl px-6 font-black text-[10px] uppercase tracking-widest border-border/40 hover:bg-muted active:scale-95 transition-all">
+  <Button asChild variant="outline" className="h-12 rounded-xl px-6 font-black text-[9px] uppercase tracking-widest border-border/10 hover:bg-muted active:translate-y-px transition-all">
     <Link href={href} target="_blank">
-      <Icon className="mr-3 h-4 w-4" />
+      <Icon className="mr-3 h-4 w-4 opacity-50" />
       {label}
     </Link>
   </Button>
@@ -52,26 +52,26 @@ export default function AboutPage() {
       <GridBackground />
       
       {/* ── Hero Section ── */}
-      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 page-shell">
+      <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 page-shell text-center italic">
         <motion.div 
-          className="flex flex-col items-center text-center space-y-10"
+          className="flex flex-col items-center space-y-12"
           initial="hidden"
           animate="show"
           variants={STAGGER}
         >
           <motion.div variants={FADE_UP}>
-            <Badge variant="outline" className="rounded-lg px-5 py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.25em] text-[10px]">
-              <Heart className="mr-2 h-3.5 w-3.5 inline text-rose-500 animate-pulse" />
-              Building for the Modern Web
+            <Badge variant="outline" className="rounded-lg px-6 py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.4em] text-[10px] text-muted-foreground">
+              <Heart className="mr-3 h-3.5 w-3.5 inline text-rose-500/60" />
+              Manifesto v1.0
             </Badge>
           </motion.div>
           
-          <motion.div variants={FADE_UP} title="The LinkLayer Mission" className="space-y-8">
-            <h1 className="max-w-4xl text-5xl font-black tracking-tighter sm:text-8xl text-foreground !leading-[1]">
-              Architecting <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60">Digital Safety</span>.
+          <motion.div variants={FADE_UP} title="The LinkLayer Mission" className="space-y-10">
+            <h1 className="max-w-4xl text-6xl font-black tracking-tight sm:text-[100px] text-foreground !leading-[0.85] uppercase italic">
+              Digital <br /> <span className="text-primary italic">Permanence.</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground font-medium leading-relaxed italic">
-               LinkLayer was born from a simple observation: the internet deserves clearer, faster, and more secure routes. We bridge the gap between technical infrastructure and professional brand presentation.
+            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground font-bold leading-relaxed italic border-l-2 border-primary/20 pl-8 inline-block">
+               LinkLayer exists to provide surgical clarity for the modern web infrastructure. We bridge the gap between deep engineering and professional identity.
             </p>
           </motion.div>
         </motion.div>
@@ -144,32 +144,32 @@ export default function AboutPage() {
          >
             {[
                {
-                  title: "Clarity over clutter",
-                  desc: "We prefer a product that feels useful and deliberate rather than overloaded with noise.",
+                  title: "Surgical Clarity",
+                  desc: "Every redirection path is optimized for sub-50ms latency using a globally distributed cache-aside architecture.",
                   icon: Globe2
                },
                {
-                  title: "Trustworthy sharing",
-                  desc: "Short links should feel credible and easy to understand in both public and private contexts.",
+                  title: "Enforced Security",
+                  desc: "Proactive scanning via Safe Browsing API v4 ensures your brand identity is never linked to malicious actors.",
                   icon: ShieldCheck
                },
                {
-                  title: "Tools for real teams",
-                  desc: "The dashboard is designed to help daily operators move quickly without getting lost.",
+                  title: "Operational Velocity",
+                  desc: "A dashboard designed for precision engineering, giving teams the birds-eye view required for high-volume sharing.",
                   icon: Users2
                }
             ].map((value, i) => (
                <motion.div 
                  key={i} 
                  variants={FADE_UP}
-                 className="p-10 rounded-[40px] border border-border/40 bg-card/50 backdrop-blur-xl space-y-8 hover:bg-card transition-colors group"
+                 className="p-12 rounded-[40px] border border-border/10 bg-card/40 backdrop-blur-3xl space-y-8 hover:border-primary/20 transition-all group italic"
                >
-                  <div className="h-16 w-16 rounded-2xl bg-secondary/10 flex items-center justify-center border border-secondary/20 group-hover:scale-110 transition-transform">
-                     <value.icon className="h-8 w-8 text-secondary" />
+                  <div className="h-16 w-16 rounded-2xl bg-secondary/5 flex items-center justify-center border border-secondary/10 transition-colors group-hover:bg-secondary/10">
+                     <value.icon className="h-8 w-8 text-secondary/40 group-hover:text-primary transition-colors" />
                   </div>
                   <div className="space-y-4">
-                     <h3 className="text-xl font-black uppercase tracking-tighter italic">{value.title}</h3>
-                     <p className="text-sm text-muted-foreground font-medium leading-relaxed italic">
+                     <h3 className="text-xl font-black uppercase tracking-widest italic">{value.title}</h3>
+                     <p className="text-xs text-muted-foreground/60 font-bold leading-relaxed">
                         {value.desc}
                      </p>
                   </div>

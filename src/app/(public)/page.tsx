@@ -23,10 +23,10 @@ import {
   RefreshCw,
   Server,
   Cloud,
-  Database
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 // ── Components & Helpers ──
 
@@ -52,15 +52,14 @@ const FeatureCard = ({ item }: { item: typeof features[0] }) => {
   const Icon = item.icon;
   return (
     <motion.div
-      whileHover={{ y: -5 }}
       className="group relative flex flex-col p-8 rounded-3xl bg-card border border-border/40 shadow-xl shadow-black/5 overflow-hidden"
     >
       {/* Glow Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       
       <div className="relative z-10">
-        <div className="mb-6 h-14 w-14 items-center justify-center rounded-2xl bg-secondary/10 flex border border-secondary/20 group-hover:bg-secondary/20 transition-colors">
-          <Icon className="h-7 w-7 text-secondary group-hover:scale-110 transition-transform" />
+        <div className="mb-6 h-14 w-14 items-center justify-center rounded-2xl bg-secondary/10 flex border border-secondary/20 transition-colors">
+          <Icon className="h-7 w-7 text-secondary transition-transform" />
         </div>
         <h3 className="text-xl font-black mb-4 tracking-tight">{item.title}</h3>
         <p className="text-sm text-muted-foreground leading-relaxed font-medium mb-8 flex-1">
@@ -83,13 +82,13 @@ const FeatureCard = ({ item }: { item: typeof features[0] }) => {
 const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="border-b border-border/10 last:border-0">
+    <div className="border-b border-border/10 last:border-0 italic">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between py-6 text-left"
+        className="flex w-full items-center justify-between py-6 text-left group"
       >
-        <span className="text-sm font-bold tracking-tight text-foreground/90">{question}</span>
-        <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+        <span className="text-sm font-black tracking-tight text-foreground/80 transition-colors">{question}</span>
+        <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""} text-muted-foreground/30`} />
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -110,8 +109,33 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   );
 };
 
-// ── Data ──
-
+const HeroVisual = () => (
+  <motion.div 
+    initial={{ opacity: 0, x: 20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 1, ease: "easeOut" }}
+    className="relative w-full aspect-square max-w-xl mx-auto"
+  >
+    <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full" />
+    <div className="relative h-full w-full rounded-[40px] border border-border/10 bg-card overflow-hidden">
+       <Image 
+         src="/hero_infra_visual_1776539262719.png" 
+         alt="LinkLayer Infrastructure" 
+         fill 
+         className="object-cover opacity-90 hover:opacity-100 transition-opacity duration-700"
+         priority
+       />
+       {/* Sophisticated UI Overlays */}
+       <div className="absolute top-8 left-8 p-6 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 space-y-2">
+          <div className="flex items-center gap-3">
+             <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/70">Transit Active</span>
+          </div>
+          <p className="text-2xl font-black text-white italic tracking-tighter">42ms REDIRECT</p>
+       </div>
+    </div>
+  </motion.div>
+);
 const features = [
   {
     title: "Secure URL Shortener",
@@ -204,58 +228,63 @@ export default function Home() {
       <FloatingOrb className="w-[600px] h-[600px] bg-primary/10 left-[20%] bottom-[-10%]" delay={4} />
 
       {/* ── Hero Section ── */}
-      <section className="relative pt-16 pb-24 lg:pt-20 lg:pb-40 page-shell">
+      <section className="relative pt-16 pb-24 lg:pt-24 lg:pb-32 page-shell overflow-hidden">
         {/* Subtle grid background */}
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
-        <motion.div 
-          className="flex flex-col items-center text-center space-y-12"
-          initial="hidden"
-          animate="show"
-          variants={STAGGER}
-        >
-          <motion.div variants={FADE_UP}>
-            <div className="relative inline-flex group cursor-default">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-secondary/50 rounded-full blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-              <Badge variant="outline" className="relative rounded-full px-5 py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.2em] text-[10px]">
-                <Activity className="mr-2 h-3 w-3 inline text-secondary animate-pulse" />
-                Next-Gen Infrastructure
-              </Badge>
-            </div>
-          </motion.div>
-          
-          <motion.div variants={FADE_UP} title="LinkLayer URL Infrastructure" className="space-y-8">
-            <h1 className="max-w-5xl text-6xl font-black tracking-tighter sm:text-9xl text-foreground !leading-[1]">
-              Secure <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70">URL Shortener</span>, <br className="hidden sm:block" /> Branded Links, and Analytics.
-            </h1>
-            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground font-medium leading-relaxed">
-               Enterprise-grade link management platform uniting high-speed Redis redirection, real-time analytics, and a professional branded infrastructure.
-            </p>
-          </motion.div>
-
-          <motion.div variants={FADE_UP} className="flex flex-col gap-6 sm:flex-row pt-6">
-            <Button asChild size="lg" className="h-16 rounded-2xl px-12 font-black text-[14px] uppercase tracking-widest shadow-2xl shadow-primary/30 active:scale-95 transition-all">
-              <Link href="/signin">
-                Start for Free
-                <ArrowRight className="ml-4 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button variant="outline" asChild size="lg" className="h-16 rounded-2xl px-12 font-black text-[14px] uppercase tracking-widest border-border/40 hover:bg-muted/50 transition-all">
-              <Link href="/features">View Features</Link>
-            </Button>
-          </motion.div>
-
+        <div className="grid lg:grid-cols-2 gap-20 items-center relative z-10">
           <motion.div 
-            variants={FADE_UP}
-            className="flex items-center gap-8 pt-20 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+            className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-16 relative z-20"
+            initial="hidden"
+            animate="show"
+            variants={STAGGER}
           >
-             {partners.map((p) => (
-                <div key={p.name} className="flex items-center gap-2">
-                   <p className="text-[11px] font-black uppercase tracking-tighter">{p.name}</p>
-                </div>
-             ))}
+            <motion.div variants={FADE_UP}>
+              <div className="relative inline-flex group cursor-default">
+                <Badge variant="outline" className="relative rounded-lg px-5 py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.4em] text-[9px] text-muted-foreground">
+                  <Activity className="mr-3 h-3.5 w-3.5 inline text-primary" />
+                  Engineering Protocol v2.6
+                </Badge>
+              </div>
+            </motion.div>
+            
+            <motion.div variants={FADE_UP} title="LinkLayer URL Infrastructure" className="space-y-10">
+              <h1 className="max-w-4xl text-6xl font-black tracking-tight sm:text-8xl lg:text-[90px] text-foreground !leading-[0.85] uppercase italic">
+                Secure <br className="hidden sm:block" /> <span className="text-primary italic">Transit</span> <br className="hidden sm:block" /> Protocols.
+              </h1>
+              <p className="max-w-xl text-lg sm:text-xl text-muted-foreground font-medium leading-relaxed italic border-l-2 border-primary/20 pl-8 ml-2">
+                 High-fidelity link management uniting surgical redirection and neural infrastructure mapping. Built for teams that prioritize precision over noise.
+              </p>
+            </motion.div>
+
+            <motion.div variants={FADE_UP} className="flex flex-col gap-8 sm:flex-row pt-8">
+              <Button asChild size="lg" className="h-16 rounded-xl px-16 font-black text-[14px] uppercase tracking-widest bg-primary hover:bg-primary/9 transition-all outline-none border-none shadow-none">
+                <Link href="/signin">
+                  Initialize
+                  <ArrowRight className="ml-5 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button variant="outline" asChild size="lg" className="h-16 rounded-xl px-16 font-black text-[14px] uppercase tracking-widest border-border/40 transition-all outline-none">
+                <Link href="/features">View Stack</Link>
+              </Button>
+            </motion.div>
+
+            <motion.div 
+              variants={FADE_UP}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-12 pt-16 grayscale opacity-20 transition-opacity duration-1000"
+            >
+               {partners.map((p) => (
+                  <div key={p.name} className="flex items-center gap-2">
+                     <p className="text-[9px] font-black uppercase tracking-[0.3em]">{p.name}</p>
+                  </div>
+               ))}
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          <div className="hidden lg:block relative">
+             <HeroVisual />
+          </div>
+        </div>
       </section>
 
       {/* ── Feature Grid ── */}
@@ -308,61 +337,39 @@ export default function Home() {
                        Furthermore, our branded links aren&apos;t just aesthetically pleasing—they are functionally superior. By integrating custom domain routing and strict SSL enforcement, we provide a level of link management that satisfies even the most rigorous enterprise security standards.
                     </p>
                  </div>
-                 <div className="grid grid-cols-2 gap-6 pt-6">
-                    <div className="p-6 rounded-2xl bg-card border border-border/40">
-                       <Server className="h-6 w-6 text-primary mb-4" />
-                       <h4 className="text-sm font-black uppercase tracking-widest mb-2">Redis Acceleration</h4>
-                       <p className="text-xs text-muted-foreground leading-relaxed">Sub-50ms redirection via global in-memory caching layers.</p>
+                 <div className="grid grid-cols-2 gap-4 pt-6">
+                    <div className="p-8 rounded-3xl bg-card border border-border/10">
+                       <Server className="h-6 w-6 text-primary mb-6" />
+                       <h4 className="text-sm font-black uppercase tracking-widest mb-3 italic">Redis Acceleration</h4>
+                       <p className="text-[11px] text-muted-foreground leading-relaxed font-bold italic">Global state management via high-performance clusters.</p>
                     </div>
-                    <div className="p-6 rounded-2xl bg-card border border-border/40">
-                       <Cloud className="h-6 w-6 text-secondary mb-4" />
-                       <h4 className="text-sm font-black uppercase tracking-widest mb-2">Edge Computation</h4>
-                       <p className="text-xs text-muted-foreground leading-relaxed">Distributed resolution nodes powered by Vercel Edge Runtime.</p>
+                    <div className="p-8 rounded-3xl bg-card border border-border/10">
+                       <Cloud className="h-6 w-6 text-secondary mb-6" />
+                       <h4 className="text-sm font-black uppercase tracking-widest mb-3 italic">Edge Networking</h4>
+                       <p className="text-[11px] text-muted-foreground leading-relaxed font-bold italic">Sub-50ms resolution powered by anycast distribution nodes.</p>
                     </div>
                  </div>
               </motion.div>
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative aspect-square rounded-[60px] bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/5 p-12 overflow-hidden shadow-2xl"
+                className="relative aspect-square rounded-[60px] bg-card border border-border/10 p-12 overflow-hidden"
               >
-                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px]" />
-                 <div className="relative z-10 h-full w-full rounded-[40px] bg-card border border-border/40 shadow-inner flex flex-col p-8 space-y-8">
-                    <div className="flex items-center justify-between border-b border-border/10 pb-6">
-                       <div className="flex gap-2">
-                          <span className="h-3 w-3 rounded-full bg-red-500/50" />
-                          <span className="h-3 w-3 rounded-full bg-yellow-500/50" />
-                          <span className="h-3 w-3 rounded-full bg-green-500/50" />
+                 <Image 
+                   src="/security_logic_render_1776539289148.png" 
+                   alt="Security Infrastructure" 
+                   fill 
+                   className="object-cover opacity-80"
+                 />
+                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                 <div className="relative z-10 h-full w-full flex flex-col justify-end">
+                    <div className="p-8 rounded-3xl bg-black/40 backdrop-blur-3xl border border-white/10 space-y-4">
+                       <div className="flex items-center justify-between">
+                          <Badge className="bg-emerald-500/10 text-emerald-500 border-none px-3 font-black text-[9px]">ENFORCED_SSL</Badge>
+                          <Lock className="h-4 w-4 text-white/40" />
                        </div>
-                       <Badge className="bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/10 border-emerald-500/20">LIVE_INFRA</Badge>
-                    </div>
-                    <div className="flex-1 space-y-6">
-                       <div className="h-8 w-[60%] bg-muted rounded-lg animate-pulse" />
-                       <div className="grid grid-cols-2 gap-4">
-                          <div className="h-24 rounded-xl bg-primary/5 flex flex-col items-center justify-center gap-2 border border-primary/10">
-                             <Database className="h-5 w-5 text-primary" />
-                             <span className="text-[10px] font-black uppercase">Mongo Store</span>
-                          </div>
-                          <div className="h-24 rounded-xl bg-secondary/5 flex flex-col items-center justify-center gap-2 border border-secondary/10">
-                             <Zap className="h-5 w-5 text-secondary" />
-                             <span className="text-[10px] font-black uppercase">Redis Cluster</span>
-                          </div>
-                       </div>
-                       <div className="h-32 w-full rounded-2xl border border-border/10 bg-muted/20 flex flex-col p-6 items-center justify-center text-center">
-                          <p className="text-[10px] font-black uppercase tracking-widest mb-4">Traffic Inbound</p>
-                          <div className="flex items-end gap-1.5 h-12 w-full">
-                             {[40, 70, 50, 90, 60, 100, 80, 55, 75, 95].map((h, i) => (
-                                <motion.div 
-                                  key={i}
-                                  initial={{ height: 0 }}
-                                  animate={{ height: `${h}%` }}
-                                  transition={{ repeat: Infinity, duration: 2, delay: i * 0.1, repeatType: "reverse" }}
-                                  className="flex-1 bg-secondary rounded-full" 
-                                />
-                             ))}
-                          </div>
-                       </div>
+                       <p className="text-xs font-black text-white/90 italic uppercase tracking-widest">Scanning protocols initialized.</p>
                     </div>
                  </div>
               </motion.div>
@@ -403,8 +410,8 @@ export default function Home() {
                   i: ShieldCheck
                }
             ].map((s, i) => (
-               <div key={i} className="p-8 rounded-[32px] bg-card border border-border/40 shadow-xl space-y-6 hover:border-secondary/20 transition-colors group">
-                  <div className="h-12 w-12 rounded-xl bg-secondary/5 border border-secondary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+               <div key={i} className="p-8 rounded-[32px] bg-card border border-border/40 shadow-xl space-y-6">
+                  <div className="h-12 w-12 rounded-xl bg-secondary/5 border border-secondary/10 flex items-center justify-center">
                      <s.i className="h-6 w-6 text-secondary" />
                   </div>
                   <h4 className="text-lg font-black tracking-tight">{s.t}</h4>
@@ -431,8 +438,8 @@ export default function Home() {
                </div>
                <div className="lg:w-1/2 flex justify-center lg:justify-end">
                   <div className="relative">
-                     <div className="absolute -inset-4 bg-secondary/20 blur-3xl opacity-50group-hover:opacity-100 transition-opacity" />
-                     <div className="relative h-64 w-64 sm:h-80 sm:w-80 rounded-[40px] bg-white text-black p-10 flex flex-col items-center justify-center text-center shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-700">
+                     <div className="absolute -inset-4 bg-secondary/20 blur-3xl opacity-50" />
+                     <div className="relative h-64 w-64 sm:h-80 sm:w-80 rounded-[40px] bg-white text-black p-10 flex flex-col items-center justify-center text-center shadow-2xl transition-transform duration-700">
                         <QrCode className="h-32 w-32 mb-8" strokeWidth={1.5} />
                         <p className="text-[10px] font-black uppercase tracking-[0.3em]">Scanned Securely</p>
                         <div className="mt-4 flex gap-1">
@@ -452,11 +459,11 @@ export default function Home() {
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true, margin: "-100px" }}
            transition={{ duration: 0.8 }}
-           className="group relative rounded-[40px] border border-border/40 bg-card/30 backdrop-blur-xl overflow-hidden shadow-2xl"
+           className="relative rounded-[40px] border border-border/40 bg-card/30 backdrop-blur-xl overflow-hidden shadow-2xl"
         >
            <div className="grid lg:grid-cols-2 gap-0">
               <div className="p-12 lg:p-24 flex flex-col justify-center space-y-10 border-b lg:border-b-0 lg:border-r border-border/10 relative overflow-hidden">
-                 <QrCode className="absolute -right-32 -bottom-32 w-[600px] h-[600px] text-primary/[0.03] -rotate-12 group-hover:rotate-0 transition-transform duration-[2s]" />
+                 <QrCode className="absolute -right-32 -bottom-32 w-[600px] h-[600px] text-primary/[0.03] transition-transform duration-[2s]" />
                  
                  <div className="relative z-10 space-y-10">
                     <Badge variant="outline" className="w-fit rounded-lg bg-primary/10 text-primary border-primary/20 px-4 py-1.5 uppercase tracking-[0.25em] text-[10px] font-black">
@@ -486,9 +493,8 @@ export default function Home() {
                  </div>
               </div>
               
-              <div className="p-12 lg:p-24 flex items-center justify-center bg-muted/20 relative group-hover:bg-muted/30 transition-colors duration-1000">
-                 <motion.div 
-                   whileHover={{ scale: 1.05, rotate: -2 }}
+              <div className="p-12 lg:p-24 flex items-center justify-center bg-muted/20 relative transition-colors duration-1000">
+                 <div 
                    className="w-full max-w-md rounded-[32px] border border-border/40 bg-background p-10 space-y-10 shadow-2xl relative z-10"
                  >
                     <div className="flex gap-3 border-b border-border/10 pb-6">
@@ -496,16 +502,16 @@ export default function Home() {
                        <span className="h-3 w-10 rounded-full bg-border/20" />
                        <span className="h-3 w-12 rounded-full bg-border/20" />
                     </div>
-                    <div className="aspect-square bg-white rounded-3xl border border-border/10 p-12 flex items-center justify-center relative overflow-hidden group/qr shadow-inner">
+                    <div className="aspect-square bg-white rounded-3xl border border-border/10 p-12 flex items-center justify-center relative overflow-hidden shadow-inner">
                        <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_2px_2px,black_1px,transparent_0)] bg-[size:24px_24px]" />
-                       <QrCode className="h-48 w-48 text-foreground relative z-10 group-hover/qr:scale-110 transition-transform duration-700" strokeWidth={1} />
-                       <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover/qr:opacity-100 transition-opacity" />
+                       <QrCode className="h-48 w-48 text-foreground relative z-10 transition-transform duration-700" strokeWidth={1} />
+                       <div className="absolute inset-0 bg-primary/5 opacity-0 transition-opacity" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                       <div className="h-14 rounded-2xl bg-secondary text-secondary-foreground flex items-center justify-center text-[10px] font-black uppercase tracking-widest cursor-pointer hover:brightness-110 active:scale-95 transition-all">Download SVG</div>
-                       <div className="h-14 rounded-2xl border border-border/40 flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-muted-foreground cursor-pointer hover:bg-muted active:scale-95 transition-all">Save Preset</div>
+                       <div className="h-14 rounded-2xl bg-secondary text-secondary-foreground flex items-center justify-center text-[10px] font-black uppercase tracking-widest cursor-pointer hover:brightness-110 transition-all">Download SVG</div>
+                       <div className="h-14 rounded-2xl border border-border/40 flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-muted-foreground cursor-pointer hover:bg-muted transition-all">Save Preset</div>
                     </div>
-                 </motion.div>
+                 </div>
               </div>
            </div>
         </motion.div>
@@ -552,28 +558,44 @@ export default function Home() {
       </section>
 
       {/* ── Big Analytics Visual Counter ── */}
-      <section className="py-24 lg:py-40 bg-foreground text-background overflow-hidden relative">
-         <div className="absolute inset-0 bg-[radial-gradient(circle_at_2px_2px,white_0.02px,transparent_0)] bg-[size:40px_40px] opacity-10" />
+      <section className="py-24 lg:py-48 bg-foreground text-background overflow-hidden relative">
          <div className="page-shell relative z-10">
-            <div className="max-w-4xl mx-auto text-center space-y-12">
-               <p className="text-sm font-black uppercase tracking-[0.5em] text-primary">Global Transit Stats</p>
-               <h2 className="text-6xl sm:text-[140px] font-black tracking-tighter leading-none italic">
-                  800M+ <br/> <span className="text-background/20 italic">Resolutions.</span>
-               </h2>
-               <p className="text-xl text-background/60 leading-relaxed font-medium italic">
-                  Our link management infrastructure is built to process massive throughput. With integrated analytics mapping every transit, we provide the bird&apos;s eye view your engineering and marketing teams need to scale with confidence.
-               </p>
-               <div className="flex flex-wrap justify-center gap-12 pt-12 italic">
-                  {[
-                     { l: "Sub-50ms Latency", i: Zap },
-                     { l: "99.99% Availability", i: Check },
-                     { l: "Real-time Delta", i: Activity }
-                  ].map((s, i) => (
-                     <div key={i} className="flex items-center gap-3 border border-background/10 rounded-full px-6 py-3">
-                        <s.i className="h-4 w-4 text-primary" />
-                        <span className="text-xs font-black uppercase tracking-widest">{s.l}</span>
-                     </div>
-                  ))}
+            <div className="grid lg:grid-cols-2 gap-32 items-center">
+               <div className="space-y-12 italic">
+                  <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Global Transit Matrix</p>
+                  <h2 className="text-7xl sm:text-[120px] font-black tracking-tight leading-[0.85] italic uppercase flex flex-col">
+                     <span>Live</span>
+                     <span className="text-background/20">Transit.</span>
+                  </h2>
+                  <p className="max-w-xl text-xl text-background/60 leading-relaxed font-bold italic">
+                     Our infrastructure is engineered for massive throughput, providing surgical visibility into every link resolution across the global edge network.
+                  </p>
+                  <div className="flex flex-col gap-6 pt-6">
+                    {[
+                       { l: "Sub-40ms Global Latency", i: Zap },
+                       { l: "99.999% Service Availability", i: Check },
+                       { l: "Neural Flow Analysis", i: Activity }
+                    ].map((s, i) => (
+                       <div key={i} className="flex items-center gap-6 border-b border-background/10 pb-6 last:border-0 hover:border-primary/40 transition-colors">
+                          <s.i className="h-6 w-6 text-primary" />
+                          <span className="text-xs font-black uppercase tracking-[0.2em]">{s.l}</span>
+                       </div>
+                    ))}
+                  </div>
+               </div>
+               <div className="relative aspect-square">
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="relative h-full w-full rounded-[60px] overflow-hidden border border-white/5"
+                  >
+                     <Image 
+                       src="/analytics_map_render_1776539314227.png" 
+                       alt="Global Analytics Map" 
+                       fill 
+                       className="object-cover opacity-60"
+                     />
+                  </motion.div>
                </div>
             </div>
          </div>
@@ -609,10 +631,10 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="relative rounded-[50px] bg-card border border-border p-16 md:p-32 text-center space-y-12 max-w-6xl mx-auto border-t-[10px] border-t-primary shadow-2xl overflow-hidden group"
+          className="relative rounded-[50px] bg-card border border-border p-16 md:p-32 text-center space-y-12 max-w-6xl mx-auto border-t-[10px] border-t-primary shadow-2xl overflow-hidden"
         >
            {/* Abstract grid background for CTA */}
-           <div className="absolute inset-0 opacity-[0.03] pointer-events-none group-hover:opacity-[0.05] transition-opacity duration-1000" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+           <div className="absolute inset-0 opacity-[0.03] pointer-events-none transition-opacity duration-1000" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '40px 40px' }} />
            
            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full -z-10 animate-pulse" />
 
@@ -624,7 +646,7 @@ export default function Home() {
            </div>
            
            <div className="relative z-10 flex flex-col items-center gap-10 pt-6">
-              <Button size="lg" asChild className="h-20 rounded-[28px] px-16 font-black text-[16px] uppercase tracking-[0.2em] shadow-2xl shadow-primary/40 hover:scale-105 active:scale-95 transition-all outline-none">
+              <Button size="lg" asChild className="h-20 rounded-[28px] px-16 font-black text-[16px] uppercase tracking-[0.2em] shadow-2xl shadow-primary/40 transition-all outline-none">
                  <Link href="/signin">Get Started Free</Link>
               </Button>
               <div className="flex flex-wrap justify-center gap-10 items-center text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/50">
@@ -644,7 +666,7 @@ export default function Home() {
       </section>
 
       <style jsx global>{`
-        @keyframes marquee {do
+        @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }

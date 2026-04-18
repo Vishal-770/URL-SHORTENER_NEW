@@ -33,27 +33,24 @@ const FeatureHighlight = ({ feature }: { feature: typeof detailedFeatures[0] }) 
   const Icon = feature.icon;
   return (
     <motion.div
-      whileHover={{ y: -8 }}
-      className="group relative flex flex-col p-10 rounded-[32px] bg-card border border-border/40 shadow-xl shadow-black/5 overflow-hidden active:scale-95 transition-all"
+      className="group relative flex flex-col p-10 rounded-[32px] bg-card border border-border/10 transition-colors hover:border-primary/20 overflow-hidden active:translate-y-px"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
       <div className="relative z-10 space-y-6">
-        <div className="h-16 w-16 items-center justify-center rounded-2xl bg-secondary/10 flex border border-secondary/20 group-hover:bg-secondary/20 transition-colors">
-          <Icon className="h-8 w-8 text-secondary group-hover:scale-110 transition-transform duration-500" />
+        <div className="h-14 w-14 items-center justify-center rounded-2xl bg-secondary/5 flex border border-secondary/10 group-hover:bg-secondary/10 transition-colors">
+          <Icon className="h-7 w-7 text-secondary/60 group-hover:text-primary transition-colors duration-500" />
         </div>
         
         <div className="space-y-4">
-          <h3 className="text-2xl font-black tracking-tighter">{feature.title}</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed font-medium">
+          <h3 className="text-2xl font-black tracking-tighter uppercase italic">{feature.title}</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed font-bold italic">
             {feature.description}
           </p>
         </div>
 
         <ul className="space-y-3 pt-6 border-t border-border/10">
           {feature.specs.map((spec, i) => (
-            <li key={i} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/70">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+            <li key={i} className="flex items-center gap-3 text-[9px] font-black uppercase tracking-[0.3em] text-foreground/40 italic">
+              <div className="h-1 w-1 rounded-full bg-primary/40" />
               {spec}
             </li>
           ))}
@@ -121,32 +118,32 @@ export default function FeaturesPage() {
       <GridBackground />
 
       {/* ── Hero Section ── */}
-      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 page-shell">
+      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 page-shell text-center italic">
         <motion.div 
-          className="flex flex-col items-center text-center space-y-10"
+          className="flex flex-col items-center space-y-12"
           initial="hidden"
           animate="show"
           variants={STAGGER}
         >
           <motion.div variants={FADE_UP}>
-            <Badge variant="outline" className="rounded-lg px-5 py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.25em] text-[10px]">
-              <Cpu className="mr-2 h-3.5 w-3.5 inline text-primary animate-pulse" />
-              Technical Specifications
+            <Badge variant="outline" className="rounded-lg px-6 py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.4em] text-[9px] text-muted-foreground">
+              <Cpu className="mr-3 h-3.5 w-3.5 inline text-primary" />
+              Technical Stack v4.0
             </Badge>
           </motion.div>
           
-          <motion.div variants={FADE_UP} title="LinkLayer Core Architecture" className="space-y-8">
-            <h1 className="max-w-4xl text-5xl font-black tracking-tighter sm:text-8xl text-foreground !leading-[1]">
-              The Hardware for <br className="hidden sm:block" /> Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60">Digital Routes</span>.
+          <motion.div variants={FADE_UP} title="LinkLayer Core Architecture" className="space-y-10">
+            <h1 className="max-w-4xl text-6xl font-black tracking-tight sm:text-[100px] text-foreground !leading-[0.85] uppercase italic">
+              Calculated <br /> <span className="text-primary italic">Routes.</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground font-medium leading-relaxed italic">
-               A high-density feature ecosystem designed for performance-first marketing teams. Redis-accelerated, Safe Browsing hardened, and built to scale globally.
+            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground font-bold leading-relaxed italic border-l-2 border-primary/20 pl-8 inline-block">
+               A high-density feature ecosystem designed for performance-first teams. Redis-accelerated, Safe Browsing hardened, globally atomic.
             </p>
           </motion.div>
 
-          <motion.div variants={FADE_UP} className="pt-6">
-            <Button asChild size="lg" className="h-16 rounded-[24px] px-12 font-black text-[14px] uppercase tracking-widest shadow-2xl shadow-primary/20 active:scale-95 transition-all outline-none">
-              <Link href="/signin">Get Started for Free</Link>
+          <motion.div variants={FADE_UP} className="pt-8">
+            <Button asChild size="lg" className="h-16 rounded-xl px-16 font-black text-[14px] uppercase tracking-widest bg-primary hover:bg-primary/90 transition-all outline-none border-none shadow-none">
+              <Link href="/signin">Provision Infrastructure</Link>
             </Button>
           </motion.div>
         </motion.div>
@@ -177,26 +174,26 @@ export default function FeaturesPage() {
                    icon: Activity
                  }
                ].map((item, i) => (
-                 <motion.div 
-                   key={i}
-                   initial={{ opacity: 0, y: 30 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ delay: i * 0.2 }}
-                   className="relative flex flex-col items-center text-center space-y-6 group"
-                 >
-                    <div className="h-20 w-20 rounded-[28px] bg-background border border-border/40 flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:border-primary/40 transition-all duration-500 z-10">
-                       <item.icon className="h-8 w-8 text-primary" />
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2 }}
+                    className="relative flex flex-col items-center text-center space-y-6 group italic"
+                  >
+                    <div className="h-20 w-20 rounded-[32px] bg-background border border-border/10 flex items-center justify-center transition-colors group-hover:border-primary/40 z-10">
+                       <item.icon className="h-8 w-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
                     </div>
                     <div className="space-y-3">
-                       <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/50">{item.step} Protocol</p>
-                       <h3 className="text-xl font-black uppercase tracking-tighter">{item.title}</h3>
-                       <p className="text-sm text-muted-foreground font-medium leading-relaxed max-w-[280px] mx-auto italic">
+                       <p className="text-[9px] font-black uppercase tracking-[0.4em] text-primary/30 group-hover:text-primary/60 transition-colors">{item.step} Protocol</p>
+                       <h3 className="text-xl font-black uppercase tracking-tighter group-hover:italic transition-all">{item.title}</h3>
+                       <p className="text-xs text-muted-foreground/60 font-bold leading-relaxed max-w-[280px] mx-auto italic">
                           {item.desc}
                        </p>
                     </div>
-                 </motion.div>
-               ))}
+                  </motion.div>
+                ))}
             </div>
          </div>
       </section>
