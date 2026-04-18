@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     const slug = nanoid(8);
     const userId = user._id;
-    const shortUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/${slug}`;
+    const shortUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/r/${slug}`;
     const qrCode = await QRCode.toDataURL(shortUrl);
 
     const newUrl = await ShortUrl.create({

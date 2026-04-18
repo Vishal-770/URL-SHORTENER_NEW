@@ -28,7 +28,7 @@ interface URL {
 const URLCard = ({ url }: { url: URL }) => {
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
 
-  const shortUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/redirect/${url.slug}`;
+  const shortUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/r/${url.slug}`;
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -72,7 +72,7 @@ const URLCard = ({ url }: { url: URL }) => {
                </div>
                <div className="flex items-center gap-2">
                  <Link
-                   href={`/redirect/${url.slug}`}
+                   href={`/r/${url.slug}`}
                    target="_blank"
                    rel="noopener noreferrer"
                    className="truncate text-base font-bold text-secondary tracking-tight hover:underline"

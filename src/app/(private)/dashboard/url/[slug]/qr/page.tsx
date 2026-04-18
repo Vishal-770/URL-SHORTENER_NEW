@@ -21,7 +21,7 @@ export default async function Page({
     notFound();
   }
 
-  const targetUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/${slug}`;
+  const targetUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/r/${slug}`;
   const hasCustomDesign = !!urlData.qrOptions;
 
   return (

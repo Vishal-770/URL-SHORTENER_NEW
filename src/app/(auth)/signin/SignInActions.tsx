@@ -1,28 +1,36 @@
-"use client";
-
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Button } from "@/components/ui/button";
-import { Github, ArrowRight, ArrowLeft, ShieldCheck, Link2 } from "lucide-react";
+import { Github, ArrowRight, ArrowLeft, ShieldCheck, Link2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function SignInActions() {
+  const [loadingProvider, setLoadingProvider] = useState<"google" | "github" | null>(null);
+
   const signInWithProvider = async (provider: "google" | "github") => {
-    await authClient.signIn.social(
-      {
-        provider,
-        callbackURL: "/dashboard",
-      },
-      {
-        onError: (ctx: { error: { message: string } }) => {
-          toast.error("Sign in failed", {
-            description: ctx.error.message,
-          });
+    try {
+      setLoadingProvider(provider);
+      await authClient.signIn.social(
+        {
+          provider,
+          callbackURL: "/dashboard",
         },
-      },
-    );
+        {
+          onError: (ctx: { error: { message: string } }) => {
+            setLoadingProvider(null);
+            toast.error("Sign in failed", {
+              description: ctx.error.message,
+            });
+          },
+        },
+      );
+    } catch (error) {
+      setLoadingProvider(null);
+      console.error(error);
+    }
   };
 
   return (
@@ -89,20 +97,34 @@ export default function SignInActions() {
           <div className="flex flex-col gap-4">
             <Button
               type="button"
+              disabled={!!loadingProvider}
               className="h-14 w-full rounded-lg bg-foreground text-background font-black text-[11px] uppercase tracking-widest hover:bg-foreground/90 transition-none"
               onClick={() => signInWithProvider("google")}
             >
-              Continue with Google
-              <ArrowRight className="ml-3 h-4 w-4" />
+              {loadingProvider === "google" ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <>
+                  Continue with Google
+                  <ArrowRight className="ml-3 h-4 w-4" />
+                </>
+              )}
             </Button>
             <Button
               type="button"
               variant="outline"
+              disabled={!!loadingProvider}
               className="h-14 w-full rounded-lg border-border/40 bg-card font-black text-[11px] uppercase tracking-widest text-foreground hover:bg-muted transition-none"
               onClick={() => signInWithProvider("github")}
             >
-              <Github className="mr-3 h-4 w-4" />
-              Continue with GitHub
+              {loadingProvider === "github" ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <>
+                  <Github className="mr-3 h-4 w-4" />
+                  Continue with GitHub
+                </>
+              )}
             </Button>
           </div>
 
