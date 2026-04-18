@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   ArrowRight,
@@ -10,7 +10,6 @@ import {
   QrCode,
   Link2,
   Activity,
-  Smartphone,
   ShieldCheck,
   Zap,
   Check,
@@ -24,9 +23,7 @@ import {
   RefreshCw,
   Server,
   Cloud,
-  Database,
-  BarChart4,
-  LayoutDashboard
+  Database
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -194,7 +191,7 @@ const STAGGER = {
 
 export default function Home() {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
+  useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
@@ -302,13 +299,13 @@ export default function Home() {
                  </h2>
                  <div className="space-y-8 text-muted-foreground font-medium text-lg leading-relaxed">
                     <p>
-                       Most URL shortening services are built on top of traditional relational databases that struggle under the weight of high-concurrency traffic. This leads to slow redirections and a poor user experience. Our infrastructure is fundamentally different. We've optimized every millisecond of the transit.
+                       Most URL shortening services are built on top of traditional relational databases that struggle under the weight of high-concurrency traffic. This leads to slow redirections and a poor user experience. Our infrastructure is fundamentally different. We&apos;ve optimized every millisecond of the transit.
                     </p>
                     <p>
-                       By leveraging a **Cache-Aside architectural pattern** with Redis Cloud, we ensure that as soon as a link is shortened, its resolution path is primed for the Edge. This means whether you're clicking a link in New York or Tokyo, the redirection happens at the closest possible node to the user.
+                       By leveraging a **Cache-Aside architectural pattern** with Redis Cloud, we ensure that as soon as a link is shortened, its resolution path is primed for the Edge. This means whether you&apos;re clicking a link in New York or Tokyo, the redirection happens at the closest possible node to the user.
                     </p>
                     <p>
-                       Furthermore, our branded links aren't just aesthetically pleasing—they are functionally superior. By integrating custom domain routing and strict SSL enforcement, we provide a level of link management that satisfies even the most rigorous enterprise security standards.
+                       Furthermore, our branded links aren&apos;t just aesthetically pleasing—they are functionally superior. By integrating custom domain routing and strict SSL enforcement, we provide a level of link management that satisfies even the most rigorous enterprise security standards.
                     </p>
                  </div>
                  <div className="grid grid-cols-2 gap-6 pt-6">
@@ -379,7 +376,7 @@ export default function Home() {
             <Badge className="bg-secondary/10 text-secondary hover:bg-secondary/10 border-secondary/20">SECURITY_FIRST</Badge>
             <h2 className="text-4xl sm:text-6xl font-black tracking-tighter">The anatomy of our <span className="text-secondary italic">Secure Infrastructure.</span></h2>
             <p className="text-muted-foreground font-medium text-lg leading-relaxed">
-               Trust is the most valuable currency on the internet. As a professional URL shortener, we understand that every link you generate represents your digital reputation. That's why we've built the most comprehensive security gate in the link management ecosystem.
+               Trust is the most valuable currency on the internet. As a professional URL shortener, we understand that every link you generate represents your digital reputation. That&apos;s why we&apos;ve built the most comprehensive security gate in the link management ecosystem.
             </p>
          </div>
          
@@ -428,7 +425,7 @@ export default function Home() {
                         In a digital world where phishing and malware are rampant, your audience deserves clarity. Generic short links often hide the true destination, creating hesitation and reducing click-through rates. By using our branded links infrastructure, you provide a clear, identifiable signpost for your users.
                      </p>
                      <p>
-                        Our link management platform empowers you to wrap your secure shortened URLs in a package that screams professional integrity. Whether it's for marketing, internal operations, or physical assets like QR codes, branding provides the psychological security that users need to click with confidence.
+                        Our link management platform empowers you to wrap your secure shortened URLs in a package that screams professional integrity. Whether it&apos;s for marketing, internal operations, or physical assets like QR codes, branding provides the psychological security that users need to click with confidence.
                      </p>
                   </div>
                </div>
@@ -524,7 +521,7 @@ export default function Home() {
                      {[1,2,3,4,5].map(i => <Star key={i} className="h-4 w-4 fill-primary text-primary" />)}
                   </div>
                   <h3 className="text-3xl sm:text-5xl font-black tracking-tighter leading-tight mb-10 italic">
-                     "The redirection speed is unmatched. With <span className="underline decoration-primary/50 underline-offset-[10px]">Redis acceleration</span>, our marketing links resolve before users even notice."
+                     &quot;The redirection speed is unmatched. With <span className="underline decoration-primary/50 underline-offset-[10px]">Redis acceleration</span>, our marketing links resolve before users even notice.&quot;
                   </h3>
                   <div className="flex items-center gap-5">
                      <div className="h-16 w-16 rounded-2xl bg-white/10 flex items-center justify-center text-xl font-black border border-white/20">SC</div>
@@ -539,7 +536,7 @@ export default function Home() {
                {testimonials.slice(1).map((t, i) => (
                   <div key={i} className="p-10 rounded-[40px] bg-card border border-border/40 shadow-xl flex-1 flex flex-col justify-between italic">
                      <p className="text-lg font-black tracking-tighter leading-snug mb-8">
-                        "{t.quote}"
+                        &quot;{t.quote}&quot;
                      </p>
                      <div className="flex items-center gap-4">
                         <div className="h-12 w-12 rounded-xl bg-secondary/10 flex items-center justify-center text-sm font-black border border-secondary/20">{t.avatar}</div>
@@ -564,7 +561,7 @@ export default function Home() {
                   800M+ <br/> <span className="text-background/20 italic">Resolutions.</span>
                </h2>
                <p className="text-xl text-background/60 leading-relaxed font-medium italic">
-                  Our link management infrastructure is built to process massive throughput. With integrated analytics mapping every transit, we provide the bird's eye view your engineering and marketing teams need to scale with confidence.
+                  Our link management infrastructure is built to process massive throughput. With integrated analytics mapping every transit, we provide the bird&apos;s eye view your engineering and marketing teams need to scale with confidence.
                </p>
                <div className="flex flex-wrap justify-center gap-12 pt-12 italic">
                   {[
