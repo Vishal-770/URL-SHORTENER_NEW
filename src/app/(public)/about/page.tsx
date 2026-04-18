@@ -10,13 +10,13 @@ import {
   Github, 
   Twitter, 
   ExternalLink, 
-  ArrowRight,
   Heart,
   Cpu,
   Layers,
   Database,
   Zap,
-  Activity
+  Activity,
+  LucideIcon
 } from "lucide-react";
 import Link from "next/link";
 
@@ -26,7 +26,7 @@ const GridBackground = () => (
   <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 );
 
-const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: any; label: string }) => (
+const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: LucideIcon; label: string }) => (
   <Button asChild variant="outline" className="h-12 rounded-xl px-6 font-black text-[10px] uppercase tracking-widest border-border/40 hover:bg-muted active:scale-95 transition-all">
     <Link href={href} target="_blank">
       <Icon className="mr-3 h-4 w-4" />

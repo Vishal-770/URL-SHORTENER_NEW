@@ -7,7 +7,6 @@ import {
   BarChart3,
   Globe2,
   QrCode,
-  ScanSearch,
   ShieldCheck,
   Zap,
   Check,
@@ -16,17 +15,11 @@ import {
   Activity,
   Cpu,
   Lock,
-  Server,
   Database,
-  Search,
-  ArrowRight,
   Smartphone,
-  
   Workflow,
   TrendingUp,
-  X,
-  History,
-  MousePointer2
+  X
 } from "lucide-react";
 import Link from "next/link";
 
