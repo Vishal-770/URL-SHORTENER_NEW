@@ -14,12 +14,12 @@ export function BrandLogo({ className, compact = false }: BrandLogoProps) {
       className={cn("inline-flex items-center gap-3", className)}
       aria-label="LinkLayer home"
     >
-      <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl border bg-muted/30 shadow-sm transition-transform hover:scale-105 active:scale-95">
+      <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl transition-transform hover:scale-105 active:scale-95">
         <Image 
           src="/logo.png" 
           alt="LinkLayer Logo" 
           fill 
-          className="object-cover"
+          className="object-contain"
           priority
         />
       </div>

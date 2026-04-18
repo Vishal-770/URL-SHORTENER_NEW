@@ -15,6 +15,11 @@ export default function Footer() {
       { label: "Workspace Dashboard", href: "/dashboard" },
       { label: "Account Access", href: "/signin" },
     ],
+    Social: [
+      { label: "GitHub Source", href: "https://github.com/Vishal-770/Link-Layer" },
+      { label: "X / Twitter", href: "https://x.com/vishal_7707" },
+      { label: "Portfolio", href: "https://vishaldev.space" },
+    ],
   };
 
   return (
