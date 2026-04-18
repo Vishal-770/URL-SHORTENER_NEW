@@ -8,31 +8,18 @@ const api = axios.create({
 });
 
 export async function AddNewUrl(originalUrl: string) {
-  try {
-    const response = await api.post("/api/add-url", { originalUrl });
-    return response.data;
-  } catch (err) {
-    console.log("Error occured", err);
-    return {};
-  }
+  const response = await api.post("/api/add-url", { originalUrl });
+  return response.data;
 }
+
 export async function GetAllUrl() {
-  try {
-    const response = await api.get("/api/get-url");
-    return response.data.data;
-  } catch (err) {
-    console.log("Error Occured:", err);
-    return [];
-  }
+  const response = await api.get("/api/get-url");
+  return response.data.data;
 }
+
 export async function DeleteUrl(slug: string) {
-  try {
-    const response = await api.delete("/api/delete-url", {
-      data: { slug: slug },
-    });
-    return response.data;
-  } catch (err) {
-    console.log("Error Occured:", err);
-    return [];
-  }
+  const response = await api.delete("/api/delete-url", {
+    data: { slug: slug },
+  });
+  return response.data;
 }

@@ -33,6 +33,20 @@ export async function POST(request: NextRequest) {
 
     const user = await ensureLocalUser(authUser);
 
+    // Safety Check: Google Safe Browsing
+    const { checkUrlSafety } = await import("@/lib/safety");
+    const safetyResult = await checkUrlSafety(originalUrl);
+
+    if (!safetyResult.isSafe) {
+      return NextResponse.json(
+        { 
+          message: `Security Risk: This URL is flagged as unsafe (${safetyResult.threatType?.replace(/_/g, ' ')}) by Google Safe Browsing.`, 
+          success: false 
+        },
+        { status: 400 },
+      );
+    }
+
     const slug = nanoid(8);
     const userId = user._id;
     const shortUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/r/${slug}`;
