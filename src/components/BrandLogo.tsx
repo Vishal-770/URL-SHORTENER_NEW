@@ -16,7 +16,7 @@ export function BrandLogo({ className, compact = false }: BrandLogoProps) {
     >
       <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl border bg-muted/30 shadow-sm transition-transform hover:scale-105 active:scale-95">
         <Image 
-          src="/loggo.png" 
+          src="/logo.png" 
           alt="LinkLayer Logo" 
           fill 
           className="object-cover"

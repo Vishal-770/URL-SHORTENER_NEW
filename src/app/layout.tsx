@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     siteName: "LinkLayer",
     images: [
       {
-        url: "/loggo.png",
+        url: "/logo.png",
         width: 800,
         height: 600,
         alt: "LinkLayer Logo",
@@ -64,12 +64,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LinkLayer | High-Performance URL Infrastructure",
     description: "Enterprise-grade URL shortening with real-time analytics and military-grade security gates.",
-    images: ["/loggo.png"],
+    images: ["/logo.png"],
   },
   icons: {
-    icon: "/loggo.png",
-    shortcut: "/loggo.png",
-    apple: "/loggo.png",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
   verification: {
     google: "uMEQW4n942oZXX663dP1N2Mq4LaCUGVfN89UF0pu0TI",
