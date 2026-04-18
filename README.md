@@ -93,4 +93,4 @@ We take security seriously. Every link created is checked against the Google Saf
 
 ---
 
-Built with ❤️ by the LinkLayer Engineering Team.
+Built with ❤️ by Me (only me).
