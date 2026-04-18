@@ -28,8 +28,9 @@ const URLInput = () => {
         description: "Your link is ready to share!",
       });
     },
-    onError: (error: any) => {
-      const message = error?.response?.data?.message || "Please check the URL and try again";
+    onError: (error: unknown) => {
+      const axiosError = error as { response?: { data?: { message?: string } } };
+      const message = axiosError.response?.data?.message || "Please check the URL and try again";
       toast.error("Failed to shorten URL", {
         description: message,
       });

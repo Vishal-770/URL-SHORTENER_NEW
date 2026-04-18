@@ -3,6 +3,7 @@ import ShortUrl from "@/database/models/shortUrlmodel";
 import { ensureLocalUser } from "@/lib/app-user";
 import { requireAuthenticatedRequestUser } from "@/lib/request-auth";
 import { NextRequest, NextResponse } from "next/server";
+import redis from "@/lib/redis";
 
 interface ReqBody {
   slug: string;
@@ -47,6 +48,14 @@ export async function DELETE(req: NextRequest) {
     });
 
     if (deletedUrl) {
+      // Invalidate Cache
+      if (redis) {
+        try {
+          await redis.del(`slug:${slug.trim()}`);
+        } catch (e) {
+          console.error("Redis Cache Invalidation Error:", e);
+        }
+      }
       return NextResponse.json(
         {
           message: "URL deleted successfully",

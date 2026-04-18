@@ -9,7 +9,6 @@ export default function Footer() {
     Product: [
       { label: "Overview", href: "/" },
       { label: "Internal Features", href: "/features" },
-      { label: "Pricing Strategy", href: "/pricing" },
     ],
     Company: [
       { label: "About", href: "/about" },

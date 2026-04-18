@@ -23,29 +23,56 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://link-layer.vercel.app"),
   title: {
-    default: "LinkLayer | Professional URL Shortener & QR Engine",
+    default: "LinkLayer | Enterprise URL Infrastructure & Analytics",
     template: "%s | LinkLayer",
   },
-  description: "Advanced link management platform. Shorten URLs, generate high-resolution custom QR codes, and track audience analytics in real-time.",
-  keywords: ["URL Shortener", "QR Code Generator", "Link Analytics", "Branded Links", "Marketing Tools"],
-  authors: [{ name: "LinkLayer Team" }],
+  description: "Secure, lightning-fast URL infrastructure for modern teams. Featuring Redis-backed redirects, Google Safe Browsing protection, and real-time geographic analytics.",
+  keywords: [
+    "URL Shortener", 
+    "Link Management", 
+    "QR Code Engine", 
+    "Link Analytics", 
+    "Redis Caching", 
+    "URL Security", 
+    "Google Safe Browsing",
+    "Geo-tracking"
+  ],
+  authors: [{ name: "LinkLayer Engineering" }],
   creator: "LinkLayer",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://link-layer.vercel.app",
-    title: "LinkLayer | Professional URL Shortener",
-    description: "Lightning-fast URL redirection and custom QR code design for modern teams.",
+    title: "LinkLayer | High-Performance URL Infrastructure",
+    description: "Enterprise-grade URL shortening with real-time analytics and military-grade security gates.",
     siteName: "LinkLayer",
+    images: [
+      {
+        url: "/loggo.png",
+        width: 800,
+        height: 600,
+        alt: "LinkLayer Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LinkLayer | Professional URL Shortener",
-    description: "Lightning-fast URL redirection and custom QR code design for modern teams.",
+    title: "LinkLayer | High-Performance URL Infrastructure",
+    description: "Enterprise-grade URL shortening with real-time analytics and military-grade security gates.",
+    images: ["/loggo.png"],
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/loggo.png",
+    shortcut: "/loggo.png",
+    apple: "/loggo.png",
+  },
+  verification: {
+    google: "uMEQW4n942oZXX663dP1N2Mq4LaCUGVfN89UF0pu0TI",
   },
 };
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface BrandLogoProps {
   className?: string;
@@ -13,9 +14,15 @@ export function BrandLogo({ className, compact = false }: BrandLogoProps) {
       className={cn("inline-flex items-center gap-3", className)}
       aria-label="LinkLayer home"
     >
-      <span className="flex h-10 w-10 items-center justify-center rounded-2xl border bg-primary text-sm font-semibold text-primary-foreground shadow-sm">
-        LL
-      </span>
+      <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl border bg-muted/30 shadow-sm transition-transform hover:scale-105 active:scale-95">
+        <Image 
+          src="/loggo.png" 
+          alt="LinkLayer Logo" 
+          fill 
+          className="object-cover"
+          priority
+        />
+      </div>
       {!compact && (
         <span className="flex flex-col leading-none">
           <span className="text-sm font-semibold uppercase tracking-[0.22em] text-muted-foreground">

@@ -1,9 +1,10 @@
 import { dbConnect } from "@/database/connection";
-import ShortUrl from "@/database/models/shortUrlmodel";
+import ShortUrl, { IShortUrl } from "@/database/models/shortUrlmodel";
 import { NextRequest, NextResponse } from "next/server";
 import { UAParser } from "ua-parser-js";
 import { isbot } from "isbot";
 import crypto from "node:crypto";
+import redis from "@/lib/redis";
 
 export async function GET(
   req: NextRequest,
@@ -26,11 +27,53 @@ export async function GET(
     const browser = parser.getBrowser().name || "unknown";
     const os = parser.getOS().name || "unknown";
 
-    const shortUrl = await ShortUrl.findOne({ slug });
-    
-    if (!shortUrl) {
-      return NextResponse.json(
-        { message: "Short URL not found", success: false },
+    // 1. Try Cache First (REDIS)
+    let originalUrl: string | null = null;
+    let shortUrl: IShortUrl | null = null;
+
+    if (redis) {
+      try {
+        originalUrl = await redis.get(`slug:${slug}`);
+      } catch (e) {
+        console.error("Redis Read Error:", e);
+      }
+    }
+
+    // 2. Fallback to Database (MONGODB)
+    if (!originalUrl) {
+      await dbConnect();
+      shortUrl = await ShortUrl.findOne({ slug });
+      
+      if (!shortUrl) {
+        return NextResponse.json(
+          { message: "Short URL not found", success: false },
+          { status: 404 }
+        );
+      }
+      
+      originalUrl = shortUrl.originalUrl;
+
+      // Populate Cache for next time
+      if (redis && originalUrl) {
+        try {
+          await redis.set(`slug:${slug}`, originalUrl, {
+            EX: 60 * 60 * 24 // 24 hour TTL
+          });
+        } catch (e) {
+          console.error("Redis Write Error:", e);
+        }
+      }
+    } else {
+        // If we got it from cache, we still need the doc for analytics if we want to save it
+        // Note: For extreme performance, we could skip this and log analytics background,
+        // but for now let's fetch doc if we need to save the visit.
+        await dbConnect();
+        shortUrl = await ShortUrl.findOne({ slug });
+    }
+
+    if (!originalUrl || !shortUrl) {
+       return NextResponse.json(
+        { message: "Short URL missing", success: false },
         { status: 404 }
       );
     }

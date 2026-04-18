@@ -21,22 +21,22 @@ import { Button } from "@/components/ui/button";
 
 const features = [
   {
-    title: "Link Shortening",
-    description: "Lightning-fast URL redirection. Generate clean, branded links instantly for any campaign or operation.",
+    title: "Enterprise URL Shortening",
+    description: "Lightning-fast secure URL redirection. Generate clean, branded short links instantly with high-speed Redis caching for any campaign.",
     icon: Link2,
-    highlights: ["Custom slugs", "Instant sync", "High availability"]
+    highlights: ["Custom branded slugs", "Redis cache-accelerated", "High availability"]
   },
   {
-    title: "Deep Analytics",
-    description: "Track exactly who is clicking your links. Monitor device types, browsers, global locations, and filter bots.",
+    title: "Deep Link Analytics",
+    description: "Track exactly who is clicking your links with real-time visitor tracking. Monitor regions, devices, and browsers with neural-grade analytics.",
     icon: BarChart3,
-    highlights: ["Live click graphs", "Bot detection", "Geographic data"]
+    highlights: ["Interactive map tracking", "Bot filtering logic", "Geographic data insight"]
   },
   {
-    title: "QR Code Designer",
-    description: "Build production-ready physical assets. Match your exact brand colors and add logos in 1024x1024 resolution.",
+    title: "Dynamic QR Code Engine",
+    description: "Build production-ready physical assets and custom QR codes. Match your brand colors and insert logos in 1024x1024 resolution.",
     icon: QrCode,
-    highlights: ["1024x1024 high-res", "Custom logos", "Advanced typography"]
+    highlights: ["High-resolution SVG/PNG", "Google Safe Browsing protected", "Advanced branding"]
   },
 ];
 
@@ -84,12 +84,12 @@ export default function Home() {
             </Badge>
           </motion.div>
           
-          <motion.div variants={FADE_UP} className="space-y-6">
+          <motion.div variants={FADE_UP} title="LinkLayer URL Infrastructure" className="space-y-6">
             <h1 className="max-w-5xl text-6xl font-black tracking-tight sm:text-8xl text-foreground !leading-[1.1]">
-              Shorten, Track, <br className="hidden sm:block" /> and Brand Every Scan.
+              Secure URL Shortener, <br className="hidden sm:block" /> Branded Links, and Analytics.
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground font-medium leading-relaxed">
-               A professional workspace uniting lightning-fast URL shortening, detailed audience analytics, and a high-resolution QR design engine.
+               Enterprise-grade link management platform uniting high-speed Redis redirection, real-time audience tracking, and a professional high-resolution QR code engine.
             </p>
           </motion.div>
 
@@ -120,7 +120,7 @@ export default function Home() {
       <section className="py-24 lg:py-32 bg-muted/20 border-y border-border/10">
          <div className="page-shell">
             <div className="text-center space-y-4 mb-16">
-               <h2 className="text-3xl sm:text-4xl font-black tracking-tight">Three steps to deployment.</h2>
+               <h2 className="text-3xl sm:text-4xl font-black tracking-tight">How our Link Management Platform works.</h2>
                <p className="text-muted-foreground font-medium">From raw link to tracked campaign in seconds.</p>
             </div>
             
@@ -160,7 +160,7 @@ export default function Home() {
           variants={STAGGER}
         >
           <motion.div variants={FADE_UP} className="text-center space-y-4">
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight">Everything in one plain.</h2>
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight">The All-in-One Link Infrastructure.</h2>
             <p className="text-muted-foreground font-medium max-w-2xl mx-auto">No scattered tools. Build your links, check your traffic, and design your physical assets all from a single synchronized dashboard.</p>
           </motion.div>
 
@@ -215,7 +215,7 @@ export default function Home() {
                        Engineered for Print
                     </Badge>
                     <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
-                       Professional <br/> QR Engine.
+                       High-Resolution <br/> QR Engine.
                     </h2>
                     <p className="text-muted-foreground font-medium leading-relaxed max-w-md">
                        Merge your database state directly into high-fidelity physical assets. Add center logos, change dot patterns, and download directly in ultra high-resolution formats.
@@ -326,7 +326,7 @@ export default function Home() {
                     Actionable Data
                  </Badge>
                  <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-                    Who, Where, <br/> and How.
+                    Real-time Link <br/> Analytics Insights.
                  </h2>
                  <p className="text-secondary-foreground/70 font-medium leading-relaxed max-w-md">
                     Stop flying blind. Every link you share acts as a sensor, recording exact interaction data. View detailed visit histories, separate human clicks from bot traffic, and understand exactly which devices your audience uses.
@@ -354,7 +354,7 @@ export default function Home() {
            <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '32px 32px' }} />
 
            <div className="relative z-10 space-y-6">
-              <h2 className="text-5xl sm:text-6xl font-black tracking-tight">Deploy your links today.</h2>
+              <h2 className="text-5xl sm:text-6xl font-black tracking-tight">Create your secure links today.</h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-medium">
                  Join the platform built for teams who need their infrastructure to be fast, reliable, and beautifully designed.
               </p>
