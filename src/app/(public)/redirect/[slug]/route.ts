@@ -2,7 +2,6 @@ import { dbConnect } from "@/database/connection";
 import ShortUrl from "@/database/models/shortUrlmodel";
 import { NextRequest, NextResponse } from "next/server";
 import { UAParser } from "ua-parser-js";
-import geoip from "geoip-lite";
 import { isbot } from "isbot";
 import crypto from "node:crypto";
 
@@ -38,9 +37,13 @@ export async function GET(
 
     // Safely collect analytics
     try {
-      // Enhanced Analytics
-      const geo = geoip.lookup(ip);
       const botStatus = isbot(userAgent);
+      
+      // Vercel Geolocation Headers
+      const country = req.headers.get("x-vercel-ip-country") || "unknown";
+      const city = req.headers.get("x-vercel-ip-city") || "unknown";
+      const region = req.headers.get("x-vercel-ip-country-region") || "unknown";
+      const timezone = req.headers.get("x-vercel-ip-timezone") || "unknown";
       
       // Clean Referring Domain
       let referringDomain = "Direct";
@@ -68,10 +71,10 @@ export async function GET(
         browser,
         referrer,
         userAgent,
-        country: geo?.country || "unknown",
-        city: geo?.city || "unknown",
-        region: geo?.region || "unknown",
-        timezone: geo?.timezone || "unknown",
+        country,
+        city,
+        region,
+        timezone,
         isBot: botStatus,
         language,
         visitorId,
