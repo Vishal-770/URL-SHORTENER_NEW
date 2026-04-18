@@ -644,7 +644,7 @@ export default function Home() {
       </section>
 
       <style jsx global>{`
-        @keyframes marquee {
+        @keyframes marquee {do
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }

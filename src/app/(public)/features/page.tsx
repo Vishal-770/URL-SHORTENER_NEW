@@ -2,54 +2,119 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import {
   BarChart3,
   Globe2,
   QrCode,
   ScanSearch,
   ShieldCheck,
-  Sparkles,
+  Zap,
+  Check,
+  Palette,
+  Layers,
+  Activity,
+  Cpu,
+  Lock,
+  Server,
+  Database,
+  Search,
+  ArrowRight,
+  Smartphone,
+  
   Workflow,
+  TrendingUp,
+  X,
+  History,
+  MousePointer2
 } from "lucide-react";
+import Link from "next/link";
 
-const features = [
+// ── Components & Helpers ──
+
+const GridBackground = () => (
+  <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+);
+
+const FeatureHighlight = ({ feature }: { feature: typeof detailedFeatures[0] }) => {
+  const Icon = feature.icon;
+  return (
+    <motion.div
+      whileHover={{ y: -8 }}
+      className="group relative flex flex-col p-10 rounded-[32px] bg-card border border-border/40 shadow-xl shadow-black/5 overflow-hidden active:scale-95 transition-all"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="relative z-10 space-y-6">
+        <div className="h-16 w-16 items-center justify-center rounded-2xl bg-secondary/10 flex border border-secondary/20 group-hover:bg-secondary/20 transition-colors">
+          <Icon className="h-8 w-8 text-secondary group-hover:scale-110 transition-transform duration-500" />
+        </div>
+        
+        <div className="space-y-4">
+          <h3 className="text-2xl font-black tracking-tighter">{feature.title}</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed font-medium">
+            {feature.description}
+          </p>
+        </div>
+
+        <ul className="space-y-3 pt-6 border-t border-border/10">
+          {feature.specs.map((spec, i) => (
+            <li key={i} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/70">
+              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+              {spec}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+};
+
+// ── Data ──
+
+const detailedFeatures = [
   {
-    title: "Instant Link Generation",
-    description: "Generate short links from your dashboard without extra steps or clutter. Built for speed.",
-    icon: Sparkles,
-  },
-  {
-    title: "Deep Device Analytics",
-    description: "Understand clicks, browsers, devices, and operating systems from one continuous analytics flow.",
-    icon: BarChart3,
-  },
-  {
-    title: "QR Code Engineering",
-    description: "Every link carries a QR-ready workflow. Design print-ready assets in 1024x1024 resolution.",
-    icon: QrCode,
-  },
-  {
-    title: "Workspace Organization",
-    description: "Use a dedicated workspace layout so link creation, reviews, and monitoring are effortlessly handled.",
-    icon: Workflow,
-  },
-  {
-    title: "Global Edge Redirects",
-    description: "Deliver high-speed redirects worldwide using edge networks to guarantee immediate resolution.",
+    title: "Global Edge Indexing",
+    description: "Every link resolution is handled by a globally distributed infrastructure. By utilizing Vercel Edge Runtime alongside Redis Cloud, we guarantee redirections resolve in sub-50ms latency, regardless of your visitor's geographic location.",
     icon: Globe2,
+    specs: ["Sub-50ms Global Latency", "Distributed Cache Purging", "Anycast Network Support"]
   },
   {
-    title: "Encrypted Auth Routes",
-    description: "Enterprise-grade authentication keeps your internal operational area completely separate from public traffic.",
-    icon: ShieldCheck,
+    title: "High-Resolution QR Engine",
+    description: "Built for physical marketing campaigns. Our QR engine generates 1024x1024 SVG assets with customizable dot patterns, error correction levels (L, M, Q, H), and brand-integrated logo overlays that maintain total readability.",
+    icon: QrCode,
+    specs: ["SVG / PNG Export", "Custom Logo Overlays", "Error Correction Logic"]
   },
+  {
+    title: "Neural Analytic Fingerprinting",
+    description: "Track visitor telemetry with precision. Monitor device types, browser versions, and operating systems in real-time. Our system filters bot traffic automatically to ensure your marketing data remains high-fidelity and actionable.",
+    icon: BarChart3,
+    specs: ["Real-time Geo-IP Mapping", "OS & Browser Tracking", "High-Volume Data Pipeline"]
+  },
+  {
+    title: "Safe Browsing Security Gate",
+    description: "Security is non-negotiable. Every destination is scanned via Google Safe Browsing API v4. We protect your brand by preventing the creation of links to sites flagged for malware, phishing, or social engineering attacks.",
+    icon: ShieldCheck,
+    specs: ["API v4 Real-time Scanning", "Auto-Block Malicious Links", "Link Sanitization Engine"]
+  },
+  {
+    title: "Branded Infrastructure",
+    description: "Total control over your link presence. Configure custom domains and slugs that reflect your identity. Our multi-tenant architecture ensures that your branded workspace is isolated, secure, and fast for team collaboration.",
+    icon: Palette,
+    specs: ["Custom Slug Management", "Internal Metadata Labels", "Team Workspace Isolation"]
+  },
+  {
+    title: "Real-time Delta Sync",
+    description: "Your dashboard is alive. Powered by an optimized Next.js architecture, link creation and analytics updates happen instantly. Provision your workspace, share links, and watch the data flow without refreshing the browser.",
+    icon: Activity,
+    specs: ["Instant Dashboard Updates", "WebSocket-Ready Stream", "Sync-First Architecture"]
+  }
 ];
 
 // -- Animation Variants --
 const FADE_UP = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
 };
 
 const STAGGER = {
@@ -59,103 +124,348 @@ const STAGGER = {
 
 export default function FeaturesPage() {
   return (
-    <main className="overflow-hidden pb-32">
-      {/* ── Header Section ── */}
-      <section className="relative pt-32 pb-24 page-shell border-b border-border/10">
+    <main className="relative overflow-hidden selection:bg-primary/20 bg-background pb-32">
+      <GridBackground />
+
+      {/* ── Hero Section ── */}
+      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 page-shell">
         <motion.div 
-          className="flex flex-col items-start space-y-8 max-w-4xl"
+          className="flex flex-col items-center text-center space-y-10"
           initial="hidden"
           animate="show"
           variants={STAGGER}
         >
           <motion.div variants={FADE_UP}>
-            <Badge variant="outline" className="rounded-md px-4 py-1.5 font-bold bg-secondary/5 text-secondary border-secondary/20 shadow-none uppercase tracking-widest text-[10px]">
-              <ScanSearch className="mr-2 h-3.5 w-3.5 inline" />
-              Feature Overview
+            <Badge variant="outline" className="rounded-lg px-5 py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.25em] text-[10px]">
+              <Cpu className="mr-2 h-3.5 w-3.5 inline text-primary animate-pulse" />
+              Technical Specifications
             </Badge>
           </motion.div>
           
-          <motion.div variants={FADE_UP} className="space-y-6">
-            <h1 className="text-5xl font-black tracking-tight sm:text-7xl text-foreground !leading-[1.1]">
-              Built for teams who <br className="hidden sm:block" /> value precision.
+          <motion.div variants={FADE_UP} title="LinkLayer Core Architecture" className="space-y-8">
+            <h1 className="max-w-4xl text-5xl font-black tracking-tighter sm:text-8xl text-foreground !leading-[1]">
+              The Hardware for <br className="hidden sm:block" /> Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/80 to-foreground/60">Digital Routes</span>.
             </h1>
-            <p className="max-w-2xl text-lg text-muted-foreground font-medium leading-relaxed">
-              We focus on the essentials: lightning-fast link creation, incredibly deep analytics, and a professional UI that avoids generic marketing bloat.
+            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground font-medium leading-relaxed italic">
+               A high-density feature ecosystem designed for performance-first marketing teams. Redis-accelerated, Safe Browsing hardened, and built to scale globally.
             </p>
+          </motion.div>
+
+          <motion.div variants={FADE_UP} className="pt-6">
+            <Button asChild size="lg" className="h-16 rounded-[24px] px-12 font-black text-[14px] uppercase tracking-widest shadow-2xl shadow-primary/20 active:scale-95 transition-all outline-none">
+              <Link href="/signin">Get Started for Free</Link>
+            </Button>
           </motion.div>
         </motion.div>
       </section>
 
+      {/* ── Interactive Workflow ── */}
+      <section className="py-24 page-shell overflow-hidden">
+         <div className="relative">
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/40 to-transparent -z-10 hidden lg:block" />
+            <div className="grid lg:grid-cols-3 gap-12 lg:gap-20">
+               {[
+                 { 
+                   step: "01", 
+                   title: "Secure Inbound", 
+                   desc: "Links are instantly sanitized and scanned against the Safe Browsing security gate.",
+                   icon: Lock
+                 },
+                 { 
+                   step: "02", 
+                   title: "Redis Acceleration", 
+                   desc: "Redirections are cached at the edge for sub-50ms resolution globally.",
+                   icon: Zap
+                 },
+                 { 
+                   step: "03", 
+                   title: "Neural Analytics", 
+                   desc: "Visitor telemetry is processed and mapped to your interactive dashboard.",
+                   icon: Activity
+                 }
+               ].map((item, i) => (
+                 <motion.div 
+                   key={i}
+                   initial={{ opacity: 0, y: 30 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true }}
+                   transition={{ delay: i * 0.2 }}
+                   className="relative flex flex-col items-center text-center space-y-6 group"
+                 >
+                    <div className="h-20 w-20 rounded-[28px] bg-background border border-border/40 flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:border-primary/40 transition-all duration-500 z-10">
+                       <item.icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <div className="space-y-3">
+                       <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary/50">{item.step} Protocol</p>
+                       <h3 className="text-xl font-black uppercase tracking-tighter">{item.title}</h3>
+                       <p className="text-sm text-muted-foreground font-medium leading-relaxed max-w-[280px] mx-auto italic">
+                          {item.desc}
+                       </p>
+                    </div>
+                 </motion.div>
+               ))}
+            </div>
+         </div>
+      </section>
+
       {/* ── Features Grid ── */}
-      <section className="py-24 page-shell">
+      <section className="py-24 page-shell relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full h-full bg-primary/5 blur-[150px] rounded-full opacity-30" />
         <motion.div 
-          className="grid gap-8 md:grid-cols-2 xl:grid-cols-3"
+          className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3"
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
           variants={STAGGER}
         >
-          {features.map((feature) => {
-            const Icon = feature.icon;
-            return (
-              <motion.div 
-                variants={FADE_UP}
-                key={feature.title} 
-                className="flex flex-col p-10 rounded-2xl bg-card border border-border shadow-sm"
-              >
-                <div className="mb-6 h-12 w-12 items-center justify-center rounded-xl bg-secondary/10 flex border border-secondary/20">
-                  <Icon className="h-5 w-5 text-secondary" />
-                </div>
-                <h3 className="text-xl font-black tracking-tight mb-4">{feature.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground font-medium">
-                  {feature.description}
-                </p>
-              </motion.div>
-            );
-          })}
+          {detailedFeatures.map((feature) => (
+            <FeatureHighlight key={feature.title} feature={feature} />
+          ))}
         </motion.div>
       </section>
 
-      {/* ── Technical Changes Breakdown ── */}
-      <section className="py-24 bg-muted/20 border-y border-border/10">
-         <div className="page-shell">
-            <motion.div 
-               initial="hidden"
-               whileInView="show"
-               viewport={{ once: true, amount: 0.2 }}
-               variants={STAGGER}
-               className="grid gap-12 lg:grid-cols-[1fr_1.5fr]"
-            >
-               <motion.div variants={FADE_UP} className="space-y-6">
-                 <h2 className="text-3xl font-black tracking-tight">The Architecture.</h2>
-                 <p className="text-base leading-relaxed text-muted-foreground font-medium max-w-sm">
-                   Our platform rigorously separates public marketing pages from the private dashboard matrix, ensuring security and speed where it matters most.
+      {/* ── Analytics Matrix Spotlight ── */}
+      <section className="py-32 page-shell">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative rounded-[50px] border border-border/40 bg-card overflow-hidden shadow-2xl group"
+        >
+           <div className="grid lg:grid-cols-2">
+              <div className="p-12 lg:p-24 space-y-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-border/10">
+                 <Badge className="w-fit bg-secondary/10 text-secondary border-secondary/20 font-black uppercase tracking-widest text-[9px]">Neural Pipeline</Badge>
+                 <h2 className="text-5xl sm:text-7xl font-black tracking-tighter leading-[0.9]">
+                    Deep Analytic <br/> <span className="text-muted-foreground/30 text-6xl italic">Fingerprinting.</span>
+                 </h2>
+                 <p className="text-muted-foreground font-medium text-lg leading-relaxed italic">
+                    Understand exactly who is clicking your brand. Our analytics matrix provides high-fidelity tracking of geographic coordinates, device manufacturers, and security metadata without sacrificing user privacy.
                  </p>
+                 <div className="grid grid-cols-2 gap-8">
+                    {[
+                      { l: "Mapcn Integration", i: Globe2 },
+                      { l: "Bot Filtering", i: ShieldCheck },
+                      { l: "Precise Geolocation", i: Activity },
+                      { l: "Device Recognition", i: Smartphone }
+                    ].map((s, i) => (
+                      <div key={i} className="flex items-center gap-4 text-[11px] font-black uppercase tracking-widest text-foreground/80">
+                         <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/20 shadow-inner">
+                            <s.i className="h-5 w-5 text-secondary" />
+                         </div>
+                         {s.l}
+                      </div>
+                    ))}
+                 </div>
+              </div>
+              <div className="p-12 lg:p-24 bg-muted/20 flex items-center justify-center relative overflow-hidden group-hover:bg-muted/30 transition-colors duration-1000">
+                 <div className="relative z-10 w-full overflow-hidden rounded-[30px] border border-border/40 bg-background p-8 space-y-8 shadow-2xl">
+                    <div className="h-40 w-full rounded-2xl bg-secondary/5 border border-secondary/10 flex items-end gap-1.5 p-6 overflow-hidden">
+                       {[60, 40, 90, 70, 50, 80, 100, 65, 45, 85].map((h, i) => (
+                          <motion.div 
+                            key={i}
+                            initial={{ height: 0 }}
+                            animate={{ height: `${h}%` }}
+                            transition={{ repeat: Infinity, duration: 2, delay: i * 0.1, repeatType: "reverse" }}
+                            className="flex-1 bg-secondary/40 rounded-full" 
+                          />
+                       ))}
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                       {[1,2,3].map(i => (
+                          <div key={i} className="h-20 rounded-xl border border-border/10 p-4 space-y-2">
+                             <div className="h-2 w-[60%] bg-muted rounded-full" />
+                             <div className="h-6 w-full bg-secondary/10 rounded-lg animate-pulse" />
+                          </div>
+                       ))}
+                    </div>
+                 </div>
+                 <BarChart3 className="absolute -right-20 -bottom-20 h-80 w-80 text-primary/[0.02] group-hover:rotate-12 transition-transform duration-[3s]" strokeWidth={1} />
+              </div>
+           </div>
+        </motion.div>
+      </section>
+
+      {/* ── The Performance Stack ── */}
+      <section className="py-24 bg-foreground text-background overflow-hidden relative border-y border-background/10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_2px_2px,white_0.02px,transparent_0)] bg-[size:40px_40px] opacity-10" />
+        <div className="page-shell relative z-10">
+          <div className="grid lg:grid-cols-12 gap-20">
+             <div className="lg:col-span-5 space-y-10">
+                <Badge className="bg-primary/20 text-primary border-primary/20 font-black uppercase tracking-widest text-[9px]">Full Stack Visibility</Badge>
+                <h2 className="text-5xl sm:text-7xl font-black tracking-tighter leading-none italic">
+                   Engineered <br/> for <span className="text-primary italic">Absolute Scale.</span>
+                </h2>
+                <div className="space-y-6 text-background/60 font-medium text-lg leading-relaxed italic">
+                   <p>
+                      At LinkLayer, performance isn&apos;t an afterthought—it&apos;s the core product. We&apos;ve built our redirection engine on top of a multi-tier cache-aside architecture using Redis Cloud.
+                   </p>
+                   <p>
+                      By utilizing Vercel Edge Runtime for resolution logic, we ensure that every click navigates through the shortest possible physical route. Your links don&apos;t just work; they resolve at the speed of the modern web infrastructure.
+                   </p>
+                </div>
+                <div className="pt-8 flex flex-col gap-6">
+                   {[
+                     { l: "Redis Cache-Aside Pattern", d: "High-speed and resilient resolution logic." },
+                     { l: "Vercel Edge Distribution", d: "Global resolution nodes for sub-50ms resolution." },
+                     { l: "Safe Browsing Security Gate", d: "Military-grade link management and monitoring." }
+                   ].map((item, i) => (
+                     <div key={i} className="flex gap-4 items-start border-l-2 border-primary pl-6 py-2">
+                        <div>
+                           <h4 className="text-sm font-black uppercase tracking-widest mb-1 text-background">{item.l}</h4>
+                           <p className="text-[11px] font-bold text-background/40">{item.d}</p>
+                        </div>
+                     </div>
+                   ))}
+                </div>
+             </div>
+             
+             <div className="lg:col-span-7 flex flex-col justify-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                   {[
+                     { t: "Redis", d: "In-memory caching cluster", i: Zap },
+                     { t: "Next.js 15", d: "Server-side state sync", i: Layers },
+                     { t: "MongoDB", d: "Highly available storage", i: Database },
+                     { t: "Safe Browsing", d: "Real-time threat monitoring", i: ShieldCheck }
+                   ].map((t, i) => (
+                      <div key={i} className="p-10 rounded-[40px] bg-background/5 border border-white/5 hover:border-primary/20 transition-all group/stack">
+                         <div className="h-14 w-14 rounded-2xl bg-white/10 flex items-center justify-center mb-8 border border-white/10 group-hover/stack:bg-primary/10 group-hover/stack:border-primary/20 transition-all">
+                            <t.i className="h-7 w-7 text-background/80 group-hover/stack:text-primary transition-colors" />
+                         </div>
+                         <h3 className="text-xl font-black text-background mb-4 uppercase tracking-tighter">{t.t}</h3>
+                         <p className="text-xs text-background/40 font-bold leading-relaxed italic">{t.d}</p>
+                      </div>
+                   ))}
+                </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── QR Design Lab Spotlight ── */}
+      <section className="py-32 page-shell">
+         <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="order-2 lg:order-1 relative p-12 lg:p-24 bg-card border border-border/40 rounded-[50px] shadow-2xl overflow-hidden group">
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_2px_2px,#00000005_1px,transparent_0)] bg-[size:40px_40px]" />
+               <motion.div 
+                 whileHover={{ scale: 1.05 }}
+                 className="relative z-10 aspect-square bg-white rounded-[40px] shadow-inner p-16 flex items-center justify-center border border-border/10"
+               >
+                  <QrCode className="h-full w-full text-foreground group-hover:scale-95 transition-transform duration-[2s]" strokeWidth={1} />
                </motion.div>
-               
-               <motion.div variants={STAGGER} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                 {[
-                   "Isolated Landing Routes",
-                   "Protected Dashboard Matrix",
-                   "Client-Side State Fallbacks",
-                   "Tokenized Design System",
-                   "Hardware-Accelerated Charts",
-                   "Canvas-Driven QR Renders"
-                 ].map((item) => (
-                   <motion.div key={item} variants={FADE_UP} className="rounded-xl border border-border/50 bg-background p-6 flex flex-col justify-center">
-                     <span className="text-[11px] font-bold uppercase tracking-widest text-foreground">{item}</span>
-                   </motion.div>
-                 ))}
-               </motion.div>
-            </motion.div>
+            </div>
             
-            <Separator className="my-16" />
-            
-            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground text-center">
-              Strictly adheres to the internal CSS token system. No styling deviation.
-            </p>
+            <div className="order-1 lg:order-2 space-y-10 italic">
+               <Badge className="bg-primary/10 text-primary border-primary/20 font-black uppercase tracking-widest text-[9px]">Branding Engine</Badge>
+               <h2 className="text-5xl sm:text-7xl font-black tracking-tighter leading-none italic">
+                  The <span className="text-primary italic">QR Design</span> Laboratory.
+               </h2>
+               <div className="space-y-6 text-muted-foreground font-medium text-lg leading-relaxed italic">
+                  <p>
+                     Every link generated on LinkLayer is born with a high-fidelity physical presence. Our QR Design Lab allows you to merge digital logic with physical branding through a 4K asset pipeline.
+                  </p>
+                  <p>
+                     Customize with surgical precision. Adjust dot densities, corner roundness, and brand colors to ensure your QR assets match your corporate identity across all print and digital media.
+                  </p>
+               </div>
+               <div className="flex flex-col gap-6 pt-6">
+                  {[
+                    { l: "High-Density SVG Exports", i: Layers },
+                    { l: "Dynamic Brand Sync", i: Palette },
+                    { l: "Workspace Preset Logic", i: Workflow }
+                  ].map((f, i) => (
+                    <div key={i} className="flex items-center gap-6">
+                       <div className="h-12 w-12 rounded-2xl bg-secondary/10 flex items-center justify-center border border-secondary/20 font-black shrink-0">0{i+1}</div>
+                       <p className="text-sm font-black uppercase tracking-[0.2em]">{f.l}</p>
+                    </div>
+                  ))}
+               </div>
+            </div>
          </div>
       </section>
+
+      {/* ── Comparison Matrix ── */}
+      <section className="py-24 page-shell overflow-hidden">
+         <motion.div 
+           initial={{ opacity: 0, y: 40 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="rounded-[40px] border border-border/40 bg-card/30 backdrop-blur-xl overflow-hidden shadow-2xl"
+         >
+            <div className="p-10 lg:p-16 border-b border-border/10 bg-muted/20">
+               <h3 className="text-3xl sm:text-4xl font-black tracking-tighter italic">LinkLayer vs <span className="text-muted-foreground/30 italic">Legacy Platforms.</span></h3>
+               <p className="text-muted-foreground mt-4 font-medium italic">Why performance teams choose our infrastructure over generic shorteners.</p>
+            </div>
+            <div className="overflow-x-auto">
+               <table className="w-full text-left border-collapse">
+                  <thead>
+                     <tr className="border-b border-border/10">
+                        <th className="p-8 text-[11px] font-black uppercase tracking-widest text-muted-foreground">Capabilities</th>
+                        <th className="p-8 text-[11px] font-black uppercase tracking-widest text-primary">Enterprise LinkLayer</th>
+                        <th className="p-8 text-[11px] font-black uppercase tracking-widest text-muted-foreground/50">Generic Platforms</th>
+                     </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border/10">
+                     {[
+                        { f: "Global Redirection Latency", l: "Sub-50ms (Redis Optimized)", g: "200ms - 500ms (DB Only)" },
+                        { f: "Security Protection", l: "Google Safe Browsing v4", g: "Basic Spam Filter" },
+                        { f: "Analytic Precision", l: "Neural Fingerprinting", g: "Basic Click Counter" },
+                        { f: "QR Asset Quality", l: "4K SVG / Print Ready", g: "Low-Res Raster" },
+                        { f: "Branding Control", l: "Full Domain Isolation", g: "Shared Generic Domain" }
+                     ].map((row, i) => (
+                        <tr key={i} className="group hover:bg-primary/[0.02] transition-colors">
+                           <td className="p-8">
+                              <p className="text-sm font-black uppercase tracking-tight">{row.f}</p>
+                           </td>
+                           <td className="p-8">
+                              <div className="flex items-center gap-3">
+                                 <Check className="h-4 w-4 text-emerald-500" />
+                                 <span className="text-sm font-bold text-foreground/90">{row.l}</span>
+                              </div>
+                           </td>
+                           <td className="p-8 text-muted-foreground/40 font-medium">
+                              <div className="flex items-center gap-3">
+                                 <X className="h-4 w-4 text-red-500/30" />
+                                 <span className="text-xs">{row.g}</span>
+                              </div>
+                           </td>
+                        </tr>
+                     ))}
+                  </tbody>
+               </table>
+            </div>
+            <div className="p-10 bg-card/50 flex items-center justify-between">
+               <div className="flex items-center gap-4">
+                  <TrendingUp className="h-5 w-5 text-primary" />
+                  <p className="text-xs font-black uppercase tracking-widest text-muted-foreground italic">Efficiency Gain: +400% Improvement in redirection throughput</p>
+               </div>
+               <div className="flex -space-x-2">
+                  {[1,2,3,4].map(i => <div key={i} className="h-8 w-8 rounded-full border-2 border-card bg-muted flex items-center justify-center text-[10px] font-bold">U{i}</div>)}
+               </div>
+            </div>
+         </motion.div>
+      </section>
+
+      {/* ── Final CTA ── */}
+      <section className="py-24 page-shell text-center">
+        <div className="space-y-10 max-w-4xl mx-auto italic">
+           <h2 className="text-5xl sm:text-7xl font-black tracking-tighter italic">Ready to accelerate <br/> your <span className="text-primary italic">Infrastructure?</span></h2>
+           <div className="flex flex-col sm:flex-row justify-center gap-6">
+              <Button asChild size="lg" className="h-20 rounded-[28px] px-16 font-black text-[16px] uppercase tracking-[0.2em] shadow-2xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all outline-none">
+                 <Link href="/signin">Provision Workspace Now</Link>
+              </Button>
+           </div>
+           <p className="text-[10px] font-black uppercase tracking-[0.5em] text-muted-foreground/30 pt-10">
+              LinkLayer • Feature Catalog • 2026
+           </p>
+        </div>
+      </section>
+
+      <style jsx global>{`
+        @keyframes scan {
+          0% { top: 0% }
+          100% { top: 100% }
+        }
+      `}</style>
     </main>
   );
 }
