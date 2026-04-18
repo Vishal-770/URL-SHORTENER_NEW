@@ -1,8 +1,5 @@
 import { dbConnect } from "@/database/connection";
 import ShortUrl from "@/database/models/shortUrlmodel";
-import { PageHeader } from "@/components/PageHeader";
-import VisitHistoryTable from "./VisitHistoryTable";
-import LineChartGraph from "./LineChart";
 import AnalyticsCharts from "./AnalyticsCharts";
 import AnalyticsRangeToggler from "./AnalyticsRangeToggler";
 import Link from "next/link";
@@ -13,13 +10,13 @@ import {
   ShieldCheck,
   ArrowLeft,
   Sparkles,
-  Target,
   Zap,
-  History,
   QrCode
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import VisitHistoryTable from "./VisitHistoryTable";
+import LineChartGraph from "./LineChart";
 
 interface VisitEntry {
   timestamp: Date;
@@ -40,10 +37,10 @@ interface VisitEntry {
 }
 
 interface AnalyticsUrlData {
-  _id?: any;
+  _id?: string;
   originalUrl: string;
   slug: string;
-  userId: any;
+  userId: string;
   visitHistory: VisitEntry[];
   createdAt: Date;
   qrCode: string;
@@ -267,7 +264,7 @@ const Page = async ({
   );
 };
 
-function MatrixStat({ label, value, icon, color }: any) {
+function MatrixStat({ label, value, icon, color }: { label: string; value: number; icon: React.ReactNode; color: string }) {
   return (
     <div className="relative group overflow-hidden rounded-xl border border-border/10 bg-muted/5 p-5 transition-all hover:bg-muted/10">
       <div className={`mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-muted/50 border border-border/5 ${color}`}>
@@ -277,23 +274,6 @@ function MatrixStat({ label, value, icon, color }: any) {
       <p className="mt-1 text-4xl font-black tracking-tighter text-foreground tabular-nums leading-none">{value}</p>
       <div className={`absolute bottom-0 left-0 h-1 w-full bg-current opacity-10 transition-all group-hover:opacity-20 ${color}`} />
     </div>
-  );
-}
-
-function ActivityIcon({ className }: { className?: string }) {
-  return (
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="3" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
-      className={className}
-    >
-      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-    </svg>
   );
 }
 

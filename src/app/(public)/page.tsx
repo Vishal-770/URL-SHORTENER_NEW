@@ -14,7 +14,6 @@ import {
   Zap,
   Check,
   Palette,
-  MousePointerClick,
   Layers
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -105,7 +104,7 @@ export default function Home() {
 
           {/* Quick Metrics */}
           <motion.div variants={FADE_UP} className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full max-w-3xl pt-24 border-t border-border/10 mt-12">
-            {metrics.map((metric, i) => (
+            {metrics.map((metric) => (
               <div key={metric.label} className="flex flex-col items-center">
                   <p className="text-4xl font-black tabular-nums text-foreground">{metric.value}</p>
                   <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">

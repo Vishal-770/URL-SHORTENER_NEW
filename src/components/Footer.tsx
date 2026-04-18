@@ -2,7 +2,7 @@ import { ArrowUpRight, Github, Twitter, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Badge } from "./ui/badge";
-import { Separator } from "./ui/separator";
+// import { Separator } from "./ui/separator"; // Removed as unused
 
 export default function Footer() {
   const links = {

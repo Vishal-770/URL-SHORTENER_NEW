@@ -4,7 +4,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Menu, ArrowUpRight, LayoutDashboard, LogOut } from "lucide-react";
+import { Menu, ArrowUpRight, LayoutDashboard } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "./ui/button";
@@ -16,7 +16,7 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { ModeToggle } from "./ui/ModeToggle";
-import { Badge } from "./ui/badge";
+// import { Badge } from "./ui/badge"; // Removed as unused
 import { toast } from "sonner";
 
 export default function NavBar() {

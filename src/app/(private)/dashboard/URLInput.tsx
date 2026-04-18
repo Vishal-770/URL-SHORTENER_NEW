@@ -4,7 +4,7 @@ import { AddNewUrl } from "@/services/service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { Loader2, Plus, Sparkles } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { Input } from "@/components/ui/input";

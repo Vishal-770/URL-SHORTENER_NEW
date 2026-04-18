@@ -11,14 +11,10 @@ import {
   LayoutDashboard,
   LogOut,
   Menu,
-  Settings2,
   UserCircle2,
-  Activity,
-  ShieldCheck,
-  Server
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge"; // Removed as unused
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -31,8 +27,6 @@ import {
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/ui/ModeToggle";

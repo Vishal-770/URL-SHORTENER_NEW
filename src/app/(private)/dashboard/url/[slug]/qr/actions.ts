@@ -1,14 +1,15 @@
 "use server";
 
 import { dbConnect } from "@/database/connection";
-import ShortUrl from "@/database/models/shortUrlmodel";
+import ShortUrl, { IQROptions } from "@/database/models/shortUrlmodel";
 import { revalidatePath } from "next/cache";
 
-export async function saveQrOptions(slug: string, options: any, qrCodeData?: string) {
+export async function saveQrOptions(slug: string, options: IQROptions, qrCodeData?: string) {
   try {
     await dbConnect();
     
-    const update: any = { qrOptions: options };
+    // Define strict interface for updates
+    const update: { qrOptions: IQROptions; qrCode?: string } = { qrOptions: options };
     if (qrCodeData) {
       update.qrCode = qrCodeData;
     }

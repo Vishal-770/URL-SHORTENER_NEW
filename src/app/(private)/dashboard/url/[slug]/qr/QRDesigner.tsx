@@ -27,6 +27,11 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { saveQrOptions } from "./actions";
+import { IQROptions } from "@/database/models/shortUrlmodel";
+
+interface QRCodeInstance {
+  download: (name: string) => void;
+}
 
 const DEFAULT_OPTIONS = {
   width: 1024,
@@ -39,18 +44,18 @@ const DEFAULT_OPTIONS = {
   dotScaleA: 1.0,
   quietZone: 10,
   quietZoneColor: "rgba(0,0,0,0)",
-  logo: undefined,
-  logoWidth: undefined,
-  logoHeight: undefined,
+  logo: undefined as string | undefined,
+  logoWidth: undefined as number | undefined,
+  logoHeight: undefined as number | undefined,
   logoBackgroundTransparent: true,
   logoBackgroundColor: "#ffffff",
-  backgroundImage: undefined,
+  backgroundImage: undefined as string | undefined,
   backgroundImageAlpha: 1.0,
-  PO: undefined,
-  PI: undefined,
-  AO: undefined,
-  AI: undefined,
-  timing: undefined,
+  PO: undefined as string | undefined,
+  PI: undefined as string | undefined,
+  AO: undefined as string | undefined,
+  AI: undefined as string | undefined,
+  timing: undefined as string | undefined,
   title: "",
   titleFont: "bold 32px Outfit, sans-serif",
   titleColor: "#000000",
@@ -68,17 +73,19 @@ const DEFAULT_OPTIONS = {
   subTitleWeight: "400",
   subTitleFamily: "Outfit, sans-serif",
   drawer: "canvas",
-};
+} as const;
+
+type QRDesignerOptions = typeof DEFAULT_OPTIONS & Record<string, unknown>;
 
 interface QRDesignerProps {
   slug: string;
   targetUrl: string;
-  initialOptions: any;
+  initialOptions: IQROptions | null;
   currentQrCode: string;
 }
 
 export default function QRDesigner({ slug, targetUrl, initialOptions, currentQrCode }: QRDesignerProps) {
-  const [options, setOptions] = useState(() => {
+  const [options, setOptions] = useState<QRDesignerOptions>(() => {
     if (initialOptions) {
       return { ...DEFAULT_OPTIONS, ...initialOptions, text: targetUrl };
     }
@@ -88,7 +95,7 @@ export default function QRDesigner({ slug, targetUrl, initialOptions, currentQrC
   const [lastRenderedData, setLastRenderedData] = useState<string>(currentQrCode || "");
   const [useDesignEngine, setUseDesignEngine] = useState(!!initialOptions);
   const qrcodeContainer = useRef<HTMLDivElement>(null);
-  const qrcodeInstance = useRef<any>(null);
+  const qrcodeInstance = useRef<QRCodeInstance | null>(null);
 
   const renderQRCode = useCallback(async () => {
     if (!qrcodeContainer.current || !useDesignEngine) return;
@@ -104,7 +111,7 @@ export default function QRDesigner({ slug, targetUrl, initialOptions, currentQrC
         subTitleFont,
         width: 1024,
         height: 1024,
-        onRenderingEnd: (_qrOptions: any, dataURL: string) => {
+         onRenderingEnd: (_qrOptions: unknown, dataURL: string) => {
           setLastRenderedData(dataURL);
         },
       };
@@ -127,9 +134,9 @@ export default function QRDesigner({ slug, targetUrl, initialOptions, currentQrC
     return () => clearTimeout(timer);
   }, [renderQRCode, useDesignEngine]);
 
-  const updateOption = (key: string, value: any) => {
+  const updateOption = (key: string, value: unknown) => {
     if (!useDesignEngine) setUseDesignEngine(true);
-    setOptions((prev: any) => ({ ...prev, [key]: value }));
+    setOptions((prev: QRDesignerOptions) => ({ ...prev, [key]: value }));
   };
 
   const handleSave = async () => {

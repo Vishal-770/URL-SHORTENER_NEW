@@ -9,10 +9,8 @@ import {
   Activity,
 } from "lucide-react";
 import { auth } from "@/lib/auth";
-import { PageHeader } from "@/components/PageHeader";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 
 function getInitials(name?: string | null, email?: string | null) {
   const source = name?.trim() || email?.trim() || "LL";

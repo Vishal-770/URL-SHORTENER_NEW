@@ -1,5 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
+export type IQROptions = Record<string, unknown>;
+
 export interface IVisitEntry {
   timestamp: Date;
   ip: string;
@@ -26,7 +28,7 @@ export interface IShortUrl extends Document {
   visitHistory: IVisitEntry[];
   createdAt: Date;
   qrCode: string;
-  qrOptions?: any;
+  qrOptions?: IQROptions | null;
   updatedAt: Date;
 }
 

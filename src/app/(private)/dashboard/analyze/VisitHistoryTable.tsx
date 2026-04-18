@@ -4,7 +4,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -63,7 +62,7 @@ const VisitHistoryTable = ({ slug, initialTotal }: { slug: string; initialTotal:
       setData(result.data);
       setTotalPages(result.pages);
       setTotal(result.total);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load activity");
     } finally {
       setIsLoading(false);

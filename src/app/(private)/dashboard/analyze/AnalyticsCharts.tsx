@@ -1,22 +1,17 @@
 "use client";
 
 import { 
-  Globe, 
   Chrome, 
   MousePointer2,
   Monitor,
   Smartphone,
-  Languages,
   Navigation,
   Cpu,
-  MapPin,
-  Layers,
   Activity,
   AppWindow,
   Terminal,
   SmartphoneIcon
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 
 interface AnalyticsChartsProps {
   countryData: { name: string; value: number }[];
