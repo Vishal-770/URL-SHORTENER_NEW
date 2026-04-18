@@ -1,35 +1,24 @@
 import axios from "axios";
-export const BaseURL = process.env.BASE_URL;
+
+export const BaseURL = process.env.NEXT_PUBLIC_BASE_URL;
+
 const api = axios.create({
-  baseURL: BaseURL,
+  baseURL: BaseURL || "",
+  withCredentials: true,
 });
 
-export async function CreateUserInDB(
-  clerkId: string,
-  firstName: string,
-  lastName: string
-) {
-  const data = { clerkId, firstName, lastName };
+export async function AddNewUrl(originalUrl: string) {
   try {
-    const response = await api.post("/api/create-user", data);
-    return response.data;
-  } catch (err) {
-    console.log(err);
-    return { message: err };
-  }
-}
-export async function AddNewUrl(originalUrl: string, clerkId: string) {
-  try {
-    const response = await api.post("/api/add-url", { originalUrl, clerkId });
+    const response = await api.post("/api/add-url", { originalUrl });
     return response.data;
   } catch (err) {
     console.log("Error occured", err);
     return {};
   }
 }
-export async function GetAllUrl(clerkId: string) {
+export async function GetAllUrl() {
   try {
-    const response = await api.get(`/api/get-url?clerkId=${clerkId}`);
+    const response = await api.get("/api/get-url");
     return response.data.data;
   } catch (err) {
     console.log("Error Occured:", err);
