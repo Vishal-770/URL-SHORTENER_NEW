@@ -17,7 +17,7 @@ function useCSSColor(variable: string, fallback: string): string {
 }
 
 function LinkNetwork({ primaryColor, secondaryColor }: { primaryColor: string; secondaryColor: string }) {
-  const pointsRef = useRef<THREE.Points>(null!);
+  const pointsRef = useRef<THREE.Group>(null!);
   const count = 40;
 
   const nodes = useMemo(() => {
