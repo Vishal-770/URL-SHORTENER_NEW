@@ -9,7 +9,8 @@ const ITEMS = [
 ];
 
 export default function HorizontalGallery() {
-  const containerRef = useRef(null);
+  const containerRef = useRef(null); 
+  
   const scrollRef = useRef(null);
 
   useGSAP(() => {
