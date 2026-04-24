@@ -12,8 +12,8 @@ interface StickyImageMaskProps {
 }
 
 export default function StickyImageMask({ src, title, subtitle }: StickyImageMaskProps) {
-  const containerRef = useRef(null);
-  const maskRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const maskRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     gsap.to(maskRef.current, {

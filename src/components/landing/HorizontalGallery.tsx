@@ -9,9 +9,8 @@ const ITEMS = [
 ];
 
 export default function HorizontalGallery() {
-  const containerRef = useRef(null); 
-  
-  const scrollRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     gsap.to(scrollRef.current, {
@@ -22,23 +21,24 @@ export default function HorizontalGallery() {
     });
 
     gsap.to(".gallery-item", {
-       skewX: 10,
-       scrollTrigger: {
-         trigger: containerRef.current,
-         scrub: 0.5
-       }
+      skewX: 10,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        scrub: 0.5,
+      },
     });
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="py-40 bg-zinc-950 overflow-hidden border-b border-white/5">
-      <p className="text-[10px] font-mono uppercase tracking-[0.5em] text-white/20 mb-20 text-center">Protocol Integrations</p>
-      
+    <div ref={containerRef} className="py-40 bg-foreground overflow-hidden border-b border-border/10">
+      <p className="text-[10px] font-mono uppercase tracking-[0.5em] text-background/20 mb-20 text-center">
+        Protocol Integrations
+      </p>
       <div className="relative">
         <div ref={scrollRef} className="flex gap-20 whitespace-nowrap w-fit px-10">
           {[...ITEMS, ...ITEMS].map((item, i) => (
             <div key={i} className="gallery-item group cursor-none">
-              <span className="text-8xl md:text-[140px] font-black tracking-tighter text-transparent stroke-white/10 stroke-1 uppercase italic transition-all duration-500 group-hover:text-primary group-hover:stroke-primary">
+              <span className="text-8xl md:text-[140px] font-black tracking-tighter text-background/10 uppercase italic transition-colors duration-500 group-hover:text-primary">
                 {item}
               </span>
             </div>

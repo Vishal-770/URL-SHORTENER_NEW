@@ -15,27 +15,19 @@ export default function MagneticButton({ children, className = "" }: MagneticBut
     const button = buttonRef.current;
     if (!button) return;
 
-    const xSetter = gsap.quickSetter(button, "x", "px");
-    const ySetter = gsap.quickSetter(button, "y", "px");
+    // Typed explicitly to satisfy strict TS
+    const xSetter = gsap.quickSetter(button, "x", "px") as (value: number) => void;
+    const ySetter = gsap.quickSetter(button, "y", "px") as (value: number) => void;
 
     const moveButton = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { left, top, width, height } = button.getBoundingClientRect();
-      
-      const x = clientX - (left + width / 2);
-      const y = clientY - (top + height / 2);
-
-      xSetter(x * 0.4);
-      ySetter(y * 0.4);
+      xSetter((clientX - (left + width / 2)) * 0.4);
+      ySetter((clientY - (top + height / 2)) * 0.4);
     };
 
     const resetButton = () => {
-      gsap.to(button, {
-        x: 0,
-        y: 0,
-        duration: 1,
-        ease: "elastic.out(1, 0.3)"
-      });
+      gsap.to(button, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
     };
 
     button.addEventListener("mousemove", moveButton);
@@ -48,7 +40,7 @@ export default function MagneticButton({ children, className = "" }: MagneticBut
   }, []);
 
   return (
-    <div ref={buttonRef} className={`inline-block transition-transform duration-100 ease-out ${className}`}>
+    <div ref={buttonRef} className={`inline-block ${className}`}>
       {children}
     </div>
   );

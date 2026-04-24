@@ -5,8 +5,8 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 export default function HorizontalWorkflow() {
-  const sectionRef = useRef(null);
-  const containerRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     gsap.to(containerRef.current, {

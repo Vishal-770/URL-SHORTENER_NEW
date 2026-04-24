@@ -45,7 +45,7 @@ const FEATURES = [
 ];
 
 export default function ScrollRevealCards() {
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
     // Section heading reveal
