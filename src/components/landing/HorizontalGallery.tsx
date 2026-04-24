@@ -13,9 +13,6 @@ export default function HorizontalGallery() {
   const scrollRef = useRef(null);
 
   useGSAP(() => {
-    // Continuous loop
-    const totalWidth = scrollRef.current ? (scrollRef.current as any).scrollWidth : 0;
-    
     gsap.to(scrollRef.current, {
       xPercent: -50,
       repeat: -1,
@@ -23,7 +20,6 @@ export default function HorizontalGallery() {
       ease: "none",
     });
 
-    // Velocity tilt on scroll
     gsap.to(".gallery-item", {
        skewX: 10,
        scrollTrigger: {
