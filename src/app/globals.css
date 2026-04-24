@@ -161,10 +161,24 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    /* Hide scrollbar globally — Firefox */
+    scrollbar-width: none;
+  }
+  *::-webkit-scrollbar {
+    /* Hide scrollbar globally — Chrome, Safari, Edge */
+    display: none;
   }
   body {
     @apply bg-background text-foreground antialiased font-sans;
-    background-image: none; /* Removed fancy gradients */
+    background-image: none;
+    overflow-x: hidden;
+  }
+  /* Landing page only — hides native cursor so custom GSAP cursor is shown */
+  .landing-cursor-none,
+  .landing-cursor-none a,
+  .landing-cursor-none button,
+  .landing-cursor-none [role="button"] {
+    cursor: none;
   }
   .maplibregl-popup-content {
     @apply bg-transparent! shadow-none! p-0! rounded-none!;
@@ -186,5 +200,16 @@
 
   .surface-border {
     @apply border shadow-none;
+  }
+
+  @keyframes scan {
+    0% { top: 0%; opacity: 0; }
+    5% { opacity: 0.5; }
+    95% { opacity: 0.5; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  .hero-line {
+    will-change: transform, opacity;
   }
 }

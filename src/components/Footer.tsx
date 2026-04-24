@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, Twitter, Linkedin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Badge } from "./ui/badge";
@@ -41,12 +41,6 @@ export default function Footer() {
               <Badge variant="secondary" className="rounded-full px-4 py-1.5 bg-primary/5 text-primary border-primary/10">
                 Custom Branding
               </Badge>
-            </div>
-            
-            <div className="flex items-center gap-6 pt-4 text-muted-foreground">
-               <Twitter className="w-5 h-5 cursor-pointer hover:text-primary transition-colors" />
-               <Github className="w-5 h-5 cursor-pointer hover:text-primary transition-colors" />
-               <Linkedin className="w-5 h-5 cursor-pointer hover:text-primary transition-colors" />
             </div>
           </div>
 
