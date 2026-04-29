@@ -118,56 +118,59 @@ export default function Home() {
       <div id="nav-progress" className="fixed top-0 left-0 z-[100] h-[1.5px] bg-primary w-0" />
 
       {/* ── Navbar (absolute, scrolls with page) ── */}
-      <nav className="absolute top-0 inset-x-0 z-50 h-20 border-b border-border/10 bg-transparent">
-        <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="h-10 w-10 relative">
+      <nav className="absolute top-0 inset-x-0 z-50 h-16 md:h-20 border-b border-border/10 bg-transparent">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 h-full flex items-center justify-between">
+          <div className="flex items-center gap-2 md:gap-4">
+            <div className="h-8 md:h-10 w-8 md:w-10 relative flex-shrink-0">
               <Image src="/logo.png" alt="LinkLayer Logo" fill className="object-contain" />
             </div>
-            <span className="text-sm font-black uppercase tracking-[0.4em] italic text-foreground hidden sm:block">
+            <span className="text-xs md:text-sm font-black uppercase tracking-[0.3em] md:tracking-[0.4em] italic text-foreground hidden sm:block">
               LinkLayer
             </span>
           </div>
-          <div className="hidden md:flex items-center gap-10 text-[10px] font-mono uppercase tracking-[0.4em] text-muted-foreground">
+          <div className="hidden md:flex items-center gap-6 lg:gap-10 text-[9px] lg:text-[10px] font-mono uppercase tracking-[0.3em] md:tracking-[0.4em] text-muted-foreground">
             <Link href="#workflow" className="hover-target hover:text-primary transition-colors">Workflow</Link>
             <Link href="#infra" className="hover-target hover:text-primary transition-colors">Infrastructure</Link>
             <Link href="#security" className="hover-target hover:text-primary transition-colors">Security</Link>
             <Link href="#global" className="hover-target hover:text-primary transition-colors">Global Matrix</Link>
           </div>
-          <Button asChild size="sm" className="rounded-full font-mono text-[9px] uppercase tracking-widest bg-primary px-10 border-none">
+          <Button asChild size="sm" className="rounded-full font-mono text-[8px] md:text-[9px] uppercase tracking-widest bg-primary px-4 md:px-10 border-none flex-shrink-0">
             <Link href="/signin">Initiate</Link>
           </Button>
         </div>
       </nav>
 
       {/* ── Hero ── */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center pt-24 px-6 skew-velocity">
+      <section className="relative min-h-screen flex flex-col justify-center items-center pt-28 md:pt-24 pb-16 md:pb-20 px-4 md:px-6 lg:px-8 skew-velocity">
         <div className="hero-scene-wrapper absolute inset-0 -z-10 opacity-30">
           <HeroScene />
         </div>
 
-        <div className="max-w-5xl w-full relative z-10 text-center space-y-16">
-          <div className="hero-subtext inline-block px-6 py-2 rounded-full border border-primary/20 bg-primary/5 text-[9px] font-mono uppercase tracking-[0.8em] text-primary">
+        <div className="max-w-5xl w-full relative z-10 text-center space-y-6 md:space-y-10 lg:space-y-16">
+          <div className="hero-subtext inline-block px-3 py-1.5 md:px-6 md:py-2 rounded-full border border-primary/20 bg-primary/5 text-[7px] md:text-[8px] lg:text-[9px] font-mono uppercase tracking-[0.3em] md:tracking-[0.5em] lg:tracking-[0.8em] text-primary">
             Engineering Fast Connections
           </div>
 
-          <div className="space-y-6">
-            <SplitTextContainer className="text-7xl md:text-[140px] font-black tracking-tighter leading-[0.8] uppercase italic justify-center">
+          <div className="space-y-4 md:space-y-6">
+            <SplitTextContainer className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[100px] font-black tracking-tighter leading-[0.9] md:leading-[0.85] lg:leading-[0.8] uppercase italic justify-center" style={{
+              fontSize: 'clamp(2rem, 8vw, 140px)',
+              lineHeight: 'clamp(1.8rem, 7.2vw, 112px)',
+            }}>
               SIMPLE. POWERFUL. LINKS.
             </SplitTextContainer>
           </div>
 
-          <div className="hero-subtext max-w-2xl mx-auto">
-            <p className="text-xl md:text-2xl text-muted-foreground font-medium leading-relaxed italic border-l-2 border-primary/20 pl-8 mx-auto w-fit">
+          <div className="hero-subtext max-w-2xl mx-auto px-3 md:px-4 lg:px-0">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground font-medium leading-relaxed md:leading-loose italic border-l-2 border-primary/20 pl-4 md:pl-6 lg:pl-8 mx-auto w-fit text-left">
               High-integrity redirection flows for modern digital assets.
             </p>
           </div>
 
-          <div className="hero-cta flex flex-wrap justify-center gap-6 pt-4">
-            <Button asChild size="lg" className="h-16 px-16 rounded-xl font-black text-sm uppercase tracking-[0.2em] bg-primary border-none">
+          <div className="hero-cta flex flex-col sm:flex-row justify-center gap-3 md:gap-4 lg:gap-6 pt-2 md:pt-4 w-full px-0">
+            <Button asChild size="lg" className="h-11 md:h-14 lg:h-16 w-full sm:w-auto px-6 md:px-10 lg:px-16 rounded-lg md:rounded-xl font-black text-xs md:text-sm uppercase tracking-[0.1em] md:tracking-[0.15em] lg:tracking-[0.2em] bg-primary border-none">
               <Link href="/signin">Get Started Free</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="h-16 px-16 rounded-xl font-black text-sm uppercase tracking-[0.2em] border-border/40 text-foreground bg-transparent">
+            <Button asChild variant="outline" size="lg" className="h-11 md:h-14 lg:h-16 w-full sm:w-auto px-6 md:px-10 lg:px-16 rounded-lg md:rounded-xl font-black text-xs md:text-sm uppercase tracking-[0.1em] md:tracking-[0.15em] lg:tracking-[0.2em] border-border/40 text-foreground bg-transparent">
               <Link href="#workflow">See How It Works</Link>
             </Button>
           </div>
@@ -180,29 +183,29 @@ export default function Home() {
       </div>
 
       {/* ── Fast Links ── */}
-      <section id="infra" className="py-40 max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-24 items-center">
-          <div className="infra-text space-y-12">
-            <div className="space-y-6">
-              <div className="h-16 w-16 rounded-3xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                <Zap className="h-8 w-8 text-primary" />
+      <section id="infra" className="py-20 md:py-32 lg:py-40 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center">
+          <div className="infra-text space-y-8 md:space-y-12">
+            <div className="space-y-4 md:space-y-6">
+              <div className="h-12 md:h-16 w-12 md:w-16 rounded-2xl md:rounded-3xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                <Zap className="h-6 md:h-8 w-6 md:w-8 text-primary" />
               </div>
-              <SplitTextContainer className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic text-foreground leading-[0.85]">
+              <SplitTextContainer className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter uppercase italic text-foreground leading-[0.9] md:leading-[0.85]">
                 FAST LINKS.
               </SplitTextContainer>
             </div>
-            <p className="text-2xl text-muted-foreground leading-relaxed font-medium italic border-l-4 border-primary/10 pl-8">
+            <p className="text-base md:text-xl lg:text-2xl text-muted-foreground leading-relaxed md:leading-loose font-medium italic border-l-4 border-primary/10 pl-4 md:pl-6 lg:pl-8">
               Users hate waiting. Our global network makes sure your links resolve instantly, no matter where they are.
             </p>
-            <div className="flex flex-wrap gap-12">
+            <div className="flex flex-wrap gap-6 md:gap-8 lg:gap-12">
               {["Redis Optimized", "State-at-Edge", "Anycast Networking"].map((f, i) => (
-                <div key={i} className="flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.4em] text-foreground/60">
-                  <Check className="h-4 w-4 text-primary" /> {f}
+                <div key={i} className="flex items-center gap-2 md:gap-3 text-[9px] md:text-[10px] font-mono uppercase tracking-[0.3em] md:tracking-[0.4em] text-foreground/60">
+                  <Check className="h-3 md:h-4 w-3 md:w-4 text-primary flex-shrink-0" /> {f}
                 </div>
               ))}
             </div>
           </div>
-          <div className="infra-image relative aspect-square rounded-[50px] overflow-hidden border border-border/40">
+          <div className="infra-image relative aspect-square rounded-2xl md:rounded-3xl lg:rounded-[50px] overflow-hidden border border-border/40">
             <Image src="/fast_links_visual_1777047654399.png" alt="Fast Links" fill className="object-cover" />
           </div>
         </div>
@@ -224,19 +227,19 @@ export default function Home() {
       <ScrollRevealCards />
 
       {/* ── Final CTA ── */}
-      <section id="global" className="py-40 px-6 skew-velocity border-t border-border/10">
-        <div className="max-w-4xl mx-auto text-center space-y-12">
-          <h2 className="text-8xl font-black tracking-tighter leading-none uppercase italic">
+      <section id="global" className="py-20 md:py-32 lg:py-40 px-4 md:px-6 lg:px-8 skew-velocity border-t border-border/10">
+        <div className="max-w-4xl mx-auto text-center space-y-8 md:space-y-12">
+          <h2 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-tight md:leading-none uppercase italic">
             Ready to <br /> <span className="text-primary">Shorten?</span>
           </h2>
-          <p className="text-2xl text-muted-foreground font-medium italic">
+          <p className="text-base md:text-xl lg:text-2xl text-muted-foreground font-medium italic">
             Join thousands of users and start creating smart links in seconds.
           </p>
-          <div className="flex flex-wrap justify-center gap-6 pt-4">
-            <Button asChild size="lg" className="h-16 px-16 rounded-xl font-black text-sm uppercase tracking-[0.2em] bg-primary border-none">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 lg:gap-6 pt-2 md:pt-4 flex-wrap">
+            <Button asChild size="lg" className="h-11 md:h-14 lg:h-16 px-6 md:px-12 lg:px-16 rounded-lg md:rounded-xl font-black text-xs md:text-sm uppercase tracking-[0.1em] md:tracking-[0.2em] bg-primary border-none">
               <Link href="/signin">Initiate Terminal</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="h-16 px-16 rounded-xl font-black text-sm uppercase tracking-[0.2em] border-border/40 text-foreground bg-transparent">
+            <Button asChild variant="outline" size="lg" className="h-11 md:h-14 lg:h-16 px-6 md:px-12 lg:px-16 rounded-lg md:rounded-xl font-black text-xs md:text-sm uppercase tracking-[0.1em] md:tracking-[0.2em] border-border/40 text-foreground bg-transparent">
               <Link href="#infra">Explore Features</Link>
             </Button>
           </div>

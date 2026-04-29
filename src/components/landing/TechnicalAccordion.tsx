@@ -28,28 +28,28 @@ export default function TechnicalAccordion() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-52 space-y-20 relative">
-       <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none">
-          <Terminal size={300} />
+    <div className="max-w-5xl mx-auto px-4 md:px-6 py-20 md:py-40 lg:py-52 space-y-12 md:space-y-16 lg:space-y-20 relative">
+       <div className="absolute top-0 right-0 p-6 md:p-10 opacity-5 pointer-events-none">
+          <Terminal size={150} className="md:w-[200px] md:h-[200px] lg:w-[300px] lg:h-[300px]" />
        </div>
 
-       <div className="space-y-6 relative z-10">
-          <div className="flex items-center gap-3 text-primary">
-             <Command size={16} />
-             <p className="text-[10px] font-mono uppercase tracking-[1em]">Common Questions</p>
+       <div className="space-y-4 md:space-y-6 relative z-10">
+          <div className="flex items-center gap-2 md:gap-3 text-primary">
+             <Command size={14} className="md:w-4 md:h-4" />
+             <p className="text-[8px] md:text-[9px] lg:text-[10px] font-mono uppercase tracking-[0.6em] md:tracking-[0.8em] lg:tracking-[1em]">Common Questions</p>
           </div>
-          <h2 className="text-7xl md:text-9xl font-black uppercase italic tracking-tighter leading-none">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl 2xl:text-9xl font-black uppercase italic tracking-tighter leading-tight md:leading-none">
             FAQ <span className="text-primary italic">Section.</span>
           </h2>
        </div>
-       
-       <div className="grid gap-4 relative z-10">
+        
+       <div className="grid gap-3 md:gap-4 relative z-10">
           {FAQ.map((item, i) => (
              <AccordionItem 
-                key={i}
-                item={item} 
-                isOpen={active === i} 
-                onClick={() => setActive(active === i ? null : i)} 
+               key={i}
+               item={item} 
+               isOpen={active === i} 
+               onClick={() => setActive(active === i ? null : i)} 
              />
           ))}
        </div>
@@ -92,24 +92,24 @@ function AccordionItem({ item, isOpen, onClick }: AccordionItemProps) {
   return (
     <div 
       ref={itemRef}
-      className="border rounded-2xl group cursor-pointer transition-colors overflow-hidden border-border/20"
+      className="border rounded-xl md:rounded-2xl group cursor-pointer transition-colors overflow-hidden border-border/20"
       onClick={onClick}
     >
-       <div className="w-full flex items-center justify-between p-8 text-left">
-          <div className="space-y-1">
-             <p className="text-[9px] font-mono uppercase tracking-[0.3em] text-muted-foreground/40">{item.q}</p>
-             <h3 className="text-lg md:text-xl font-black uppercase tracking-[0.1em] group-hover:text-primary transition-colors italic">
-                {item.label}
+       <div className="w-full flex items-center justify-between p-4 md:p-6 lg:p-8 text-left gap-4">
+          <div className="space-y-0.5 md:space-y-1 flex-1 min-w-0">
+             <p className="text-[8px] md:text-[9px] font-mono uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground/40">{item.q}</p>
+             <h3 className="text-base md:text-lg lg:text-xl font-black uppercase tracking-[0.05em] md:tracking-[0.1em] group-hover:text-primary transition-colors italic break-words">
+               {item.label}
              </h3>
           </div>
-          <div className={`h-12 w-12 rounded-xl border flex items-center justify-center transition-all duration-700 ${isOpen ? 'rotate-[135deg] bg-primary border-primary' : 'border-border/30 group-hover:border-primary group-hover:rotate-90'}`}>
-             <Plus className={`h-5 w-5 transition-colors ${isOpen ? 'text-white' : 'group-hover:text-primary text-muted-foreground'}`} />
+          <div className={`h-10 md:h-12 w-10 md:w-12 rounded-lg md:rounded-xl border flex items-center justify-center transition-all duration-700 flex-shrink-0 ${isOpen ? 'rotate-[135deg] bg-primary border-primary' : 'border-border/30 group-hover:border-primary group-hover:rotate-90'}`}>
+             <Plus className={`h-4 md:h-5 w-4 md:w-5 transition-colors ${isOpen ? 'text-white' : 'group-hover:text-primary text-muted-foreground'}`} />
           </div>
        </div>
        <div ref={contentRef} className="h-0 opacity-0">
-          <div className="border-t border-border/10 mx-8 pt-10 pb-12 flex gap-12">
+          <div className="border-t border-border/10 mx-4 md:mx-6 lg:mx-8 pt-6 md:pt-8 lg:pt-10 pb-8 md:pb-10 lg:pb-12 flex gap-4 md:gap-6 lg:gap-12">
             <div className="w-[2px] shrink-0 bg-primary/30 self-stretch rounded-full" />
-            <p ref={textRef} className="text-xl text-muted-foreground font-medium leading-loose italic py-2 max-w-3xl">
+            <p ref={textRef} className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground font-medium leading-relaxed md:leading-loose italic py-2 max-w-3xl">
                {item.a}
             </p>
           </div>

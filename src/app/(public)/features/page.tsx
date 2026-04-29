@@ -33,24 +33,24 @@ const FeatureHighlight = ({ feature }: { feature: typeof detailedFeatures[0] }) 
   const Icon = feature.icon;
   return (
     <motion.div
-      className="group relative flex flex-col p-10 rounded-[32px] bg-card border border-border/10 transition-colors hover:border-primary/20 overflow-hidden active:translate-y-px"
+      className="group relative flex flex-col p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl lg:rounded-[32px] bg-card border border-border/10 transition-colors hover:border-primary/20 overflow-hidden active:translate-y-px"
     >
-      <div className="relative z-10 space-y-6">
-        <div className="h-14 w-14 items-center justify-center rounded-2xl bg-secondary/5 flex border border-secondary/10 group-hover:bg-secondary/10 transition-colors">
-          <Icon className="h-7 w-7 text-secondary/60 group-hover:text-primary transition-colors duration-500" />
+      <div className="relative z-10 space-y-4 md:space-y-6">
+        <div className="h-12 md:h-14 w-12 md:w-14 items-center justify-center rounded-xl md:rounded-2xl bg-secondary/5 flex border border-secondary/10 group-hover:bg-secondary/10 transition-colors">
+          <Icon className="h-6 md:h-7 w-6 md:w-7 text-secondary/60 group-hover:text-primary transition-colors duration-500" />
         </div>
         
-        <div className="space-y-4">
-          <h3 className="text-2xl font-black tracking-tighter uppercase italic">{feature.title}</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed font-bold italic">
+        <div className="space-y-3 md:space-y-4">
+          <h3 className="text-lg md:text-xl lg:text-2xl font-black tracking-tighter uppercase italic">{feature.title}</h3>
+          <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-bold italic">
             {feature.description}
           </p>
         </div>
 
-        <ul className="space-y-3 pt-6 border-t border-border/10">
+        <ul className="space-y-2 md:space-y-3 pt-4 md:pt-6 border-t border-border/10">
           {feature.specs.map((spec, i) => (
-            <li key={i} className="flex items-center gap-3 text-[9px] font-black uppercase tracking-[0.3em] text-foreground/40 italic">
-              <div className="h-1 w-1 rounded-full bg-primary/40" />
+            <li key={i} className="flex items-center gap-2 md:gap-3 text-[8px] md:text-[9px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-foreground/40 italic">
+              <div className="h-1 w-1 rounded-full bg-primary/40 flex-shrink-0" />
               {spec}
             </li>
           ))}
@@ -118,31 +118,31 @@ export default function FeaturesPage() {
       <GridBackground />
 
       {/* ── Hero Section ── */}
-      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 page-shell text-center italic">
+      <section className="relative pt-20 md:pt-32 pb-16 md:pb-24 lg:pt-40 lg:pb-32 page-shell text-center italic">
         <motion.div 
-          className="flex flex-col items-center space-y-12"
+          className="flex flex-col items-center space-y-8 md:space-y-12"
           initial="hidden"
           animate="show"
           variants={STAGGER}
         >
           <motion.div variants={FADE_UP}>
-            <Badge variant="outline" className="rounded-lg px-6 py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.4em] text-[9px] text-muted-foreground">
-              <Cpu className="mr-3 h-3.5 w-3.5 inline text-primary" />
+            <Badge variant="outline" className="rounded-lg px-4 md:px-6 py-1.5 md:py-2 font-black bg-background border-border/40 shadow-none uppercase tracking-[0.3em] md:tracking-[0.4em] text-[8px] md:text-[9px] text-muted-foreground">
+              <Cpu className="mr-2 md:mr-3 h-3 md:h-3.5 w-3 md:w-3.5 inline text-primary" />
               Technical Stack v4.0
             </Badge>
           </motion.div>
           
-          <motion.div variants={FADE_UP} title="LinkLayer Core Architecture" className="space-y-10">
-            <h1 className="max-w-4xl text-6xl font-black tracking-tight sm:text-[100px] text-foreground !leading-[0.85] uppercase italic">
+          <motion.div variants={FADE_UP} title="LinkLayer Core Architecture" className="space-y-6 md:space-y-10">
+            <h1 className="max-w-4xl text-4xl md:text-6xl lg:text-[100px] font-black tracking-tight text-foreground !leading-tight md:!leading-[0.85] uppercase italic">
               Calculated <br /> <span className="text-primary italic">Routes.</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground font-bold leading-relaxed italic border-l-2 border-primary/20 pl-8 inline-block">
+            <p className="mx-auto max-w-2xl text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground font-bold leading-relaxed md:leading-relaxed italic border-l-2 border-primary/20 pl-4 md:pl-8 inline-block">
                A high-density feature ecosystem designed for performance-first teams. Redis-accelerated, Safe Browsing hardened, globally atomic.
             </p>
           </motion.div>
 
-          <motion.div variants={FADE_UP} className="pt-8">
-            <Button asChild size="lg" className="h-16 rounded-xl px-16 font-black text-[14px] uppercase tracking-widest bg-primary hover:bg-primary/90 transition-all outline-none border-none shadow-none">
+          <motion.div variants={FADE_UP} className="pt-4 md:pt-8">
+            <Button asChild size="lg" className="h-11 md:h-14 lg:h-16 rounded-lg md:rounded-xl px-6 md:px-12 lg:px-16 font-black text-xs md:text-sm lg:text-[14px] uppercase tracking-widest bg-primary hover:bg-primary/90 transition-all outline-none border-none shadow-none">
               <Link href="/signin">Provision Infrastructure</Link>
             </Button>
           </motion.div>
@@ -150,10 +150,10 @@ export default function FeaturesPage() {
       </section>
 
       {/* ── Interactive Workflow ── */}
-      <section className="py-24 page-shell overflow-hidden">
+      <section className="py-16 md:py-20 lg:py-24 page-shell overflow-hidden">
          <div className="relative">
             <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/40 to-transparent -z-10 hidden lg:block" />
-            <div className="grid lg:grid-cols-3 gap-12 lg:gap-20">
+            <div className="grid lg:grid-cols-3 gap-8 md:gap-12 lg:gap-20">
                {[
                  { 
                    step: "01", 
@@ -180,15 +180,15 @@ export default function FeaturesPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.2 }}
-                    className="relative flex flex-col items-center text-center space-y-6 group italic"
+                    className="relative flex flex-col items-center text-center space-y-4 md:space-y-6 group italic"
                   >
-                    <div className="h-20 w-20 rounded-[32px] bg-background border border-border/10 flex items-center justify-center transition-colors group-hover:border-primary/40 z-10">
-                       <item.icon className="h-8 w-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
+                    <div className="h-16 md:h-20 w-16 md:w-20 rounded-2xl md:rounded-[32px] bg-background border border-border/10 flex items-center justify-center transition-colors group-hover:border-primary/40 z-10">
+                       <item.icon className="h-6 md:h-8 w-6 md:w-8 text-primary/40 group-hover:text-primary transition-colors duration-500" />
                     </div>
-                    <div className="space-y-3">
-                       <p className="text-[9px] font-black uppercase tracking-[0.4em] text-primary/30 group-hover:text-primary/60 transition-colors">{item.step} Protocol</p>
-                       <h3 className="text-xl font-black uppercase tracking-tighter group-hover:italic transition-all">{item.title}</h3>
-                       <p className="text-xs text-muted-foreground/60 font-bold leading-relaxed max-w-[280px] mx-auto italic">
+                    <div className="space-y-2 md:space-y-3">
+                       <p className="text-[8px] md:text-[9px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-primary/30 group-hover:text-primary/60 transition-colors">{item.step} Protocol</p>
+                       <h3 className="text-base md:text-lg lg:text-xl font-black uppercase tracking-tighter group-hover:italic transition-all">{item.title}</h3>
+                       <p className="text-[10px] md:text-xs lg:text-sm text-muted-foreground/60 font-bold leading-relaxed max-w-xs md:max-w-[280px] mx-auto italic">
                           {item.desc}
                        </p>
                     </div>
@@ -199,10 +199,10 @@ export default function FeaturesPage() {
       </section>
 
       {/* ── Features Grid ── */}
-      <section className="py-24 page-shell relative">
+      <section className="py-16 md:py-20 lg:py-24 page-shell relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full h-full bg-primary/5 blur-[150px] rounded-full opacity-30" />
         <motion.div 
-          className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3"
+          className="grid gap-6 md:gap-8 lg:gap-10 lg:grid-cols-2 xl:grid-cols-3"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
@@ -215,41 +215,41 @@ export default function FeaturesPage() {
       </section>
 
       {/* ── Analytics Matrix Spotlight ── */}
-      <section className="py-32 page-shell">
+      <section className="py-16 md:py-24 lg:py-32 page-shell">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative rounded-[50px] border border-border/40 bg-card overflow-hidden shadow-2xl group"
+          className="relative rounded-2xl md:rounded-3xl lg:rounded-[50px] border border-border/40 bg-card overflow-hidden shadow-2xl group"
         >
            <div className="grid lg:grid-cols-2">
-              <div className="p-12 lg:p-24 space-y-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-border/10">
-                 <Badge className="w-fit bg-secondary/10 text-secondary border-secondary/20 font-black uppercase tracking-widest text-[9px]">Neural Pipeline</Badge>
-                 <h2 className="text-5xl sm:text-7xl font-black tracking-tighter leading-[0.9]">
-                    Deep Analytic <br/> <span className="text-muted-foreground/30 text-6xl italic">Fingerprinting.</span>
+              <div className="p-6 md:p-12 lg:p-24 space-y-6 md:space-y-8 lg:space-y-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-border/10">
+                 <Badge className="w-fit bg-secondary/10 text-secondary border-secondary/20 font-black uppercase tracking-widest text-[8px] md:text-[9px] px-3 md:px-4 py-1 md:py-1.5">Neural Pipeline</Badge>
+                 <h2 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tighter leading-tight md:leading-[0.95] lg:leading-[0.9]">
+                    Deep Analytic <br/> <span className="text-muted-foreground/30 text-2xl md:text-4xl lg:text-5xl xl:text-6xl italic">Fingerprinting.</span>
                  </h2>
-                 <p className="text-muted-foreground font-medium text-lg leading-relaxed italic">
+                 <p className="text-muted-foreground font-medium text-sm md:text-base lg:text-lg leading-relaxed md:leading-relaxed italic">
                     Understand exactly who is clicking your brand. Our analytics matrix provides high-fidelity tracking of geographic coordinates, device manufacturers, and security metadata without sacrificing user privacy.
                  </p>
-                 <div className="grid grid-cols-2 gap-8">
+                 <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8">
                     {[
                       { l: "Mapcn Integration", i: Globe2 },
                       { l: "Bot Filtering", i: ShieldCheck },
                       { l: "Precise Geolocation", i: Activity },
                       { l: "Device Recognition", i: Smartphone }
                     ].map((s, i) => (
-                      <div key={i} className="flex items-center gap-4 text-[11px] font-black uppercase tracking-widest text-foreground/80">
-                         <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/20 shadow-inner">
-                            <s.i className="h-5 w-5 text-secondary" />
+                      <div key={i} className="flex items-center gap-2 md:gap-4 text-[9px] md:text-[10px] lg:text-[11px] font-black uppercase tracking-wider md:tracking-widest text-foreground/80">
+                         <div className="h-8 md:h-10 w-8 md:w-10 rounded-lg md:rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/20 shadow-inner flex-shrink-0">
+                            <s.i className="h-4 md:h-5 w-4 md:w-5 text-secondary" />
                          </div>
-                         {s.l}
+                         <span className="line-clamp-2">{s.l}</span>
                       </div>
                     ))}
                  </div>
               </div>
-              <div className="p-12 lg:p-24 bg-muted/20 flex items-center justify-center relative overflow-hidden group-hover:bg-muted/30 transition-colors duration-1000">
-                 <div className="relative z-10 w-full overflow-hidden rounded-[30px] border border-border/40 bg-background p-8 space-y-8 shadow-2xl">
-                    <div className="h-40 w-full rounded-2xl bg-secondary/5 border border-secondary/10 flex items-end gap-1.5 p-6 overflow-hidden">
+              <div className="p-6 md:p-12 lg:p-24 bg-muted/20 flex items-center justify-center relative overflow-hidden group-hover:bg-muted/30 transition-colors duration-1000 min-h-[300px] md:min-h-[400px]">
+                 <div className="relative z-10 w-full overflow-hidden rounded-2xl md:rounded-3xl border border-border/40 bg-background p-4 md:p-8 space-y-4 md:space-y-8 shadow-2xl">
+                    <div className="h-24 md:h-40 w-full rounded-lg md:rounded-2xl bg-secondary/5 border border-secondary/10 flex items-end gap-1 md:gap-1.5 p-4 md:p-6 overflow-hidden">
                        {[60, 40, 90, 70, 50, 80, 100, 65, 45, 85].map((h, i) => (
                           <motion.div 
                             key={i}
@@ -260,16 +260,16 @@ export default function FeaturesPage() {
                           />
                        ))}
                     </div>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-3 gap-2 md:gap-4">
                        {[1,2,3].map(i => (
-                          <div key={i} className="h-20 rounded-xl border border-border/10 p-4 space-y-2">
-                             <div className="h-2 w-[60%] bg-muted rounded-full" />
-                             <div className="h-6 w-full bg-secondary/10 rounded-lg animate-pulse" />
+                          <div key={i} className="h-12 md:h-20 rounded-lg md:rounded-xl border border-border/10 p-2 md:p-4 space-y-1 md:space-y-2">
+                             <div className="h-1 md:h-2 w-[60%] bg-muted rounded-full" />
+                             <div className="h-4 md:h-6 w-full bg-secondary/10 rounded-lg animate-pulse" />
                           </div>
                        ))}
                     </div>
                  </div>
-                 <BarChart3 className="absolute -right-20 -bottom-20 h-80 w-80 text-primary/[0.02] group-hover:rotate-12 transition-transform duration-[3s]" strokeWidth={1} />
+                 <BarChart3 className="absolute -right-12 md:-right-16 lg:-right-20 -bottom-12 md:-bottom-16 lg:-bottom-20 h-40 md:h-60 lg:h-80 w-40 md:w-60 lg:w-80 text-primary/[0.02] group-hover:rotate-12 transition-transform duration-[3s]" strokeWidth={1} />
               </div>
            </div>
         </motion.div>

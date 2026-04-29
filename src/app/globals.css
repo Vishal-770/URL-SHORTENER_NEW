@@ -212,4 +212,23 @@
   .hero-line {
     will-change: transform, opacity;
   }
+
+  /* Mobile-first responsive padding */
+  .px-responsive {
+    @apply px-4 md:px-6 lg:px-8;
+  }
+
+  .py-responsive {
+    @apply py-8 md:py-16 lg:py-24;
+  }
+
+  /* Safe area for zoom and different viewports */
+  .content-safe {
+    @apply overflow-x-hidden;
+  }
+
+  /* Responsive spacing grid */
+  .gap-responsive {
+    @apply gap-3 md:gap-4 lg:gap-6;
+  }
 }

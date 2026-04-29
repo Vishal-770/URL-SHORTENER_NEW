@@ -92,6 +92,16 @@ function LinkNetwork({ primaryColor, secondaryColor }: { primaryColor: string; s
 export default function HeroScene() {
   const primaryColor = useCSSColor("--primary", "#df6035");
   const secondaryColor = useCSSColor("--secondary", "#2f4b79");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <div className="absolute inset-0 -z-10 bg-background pointer-events-none overflow-hidden">
@@ -103,7 +113,7 @@ export default function HeroScene() {
           backgroundSize: "24px 24px",
         }}
       />
-      <Canvas camera={{ position: [0, 0, 10], fov: 35 }} dpr={[1, 2]}>
+      <Canvas camera={{ position: [0, 0, isMobile ? 15 : 10], fov: isMobile ? 50 : 35 }} dpr={[1, 2]}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1} color={primaryColor} />
         <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
