@@ -16,11 +16,14 @@ import StickyImageMask from "@/components/landing/StickyImageMask";
 import HorizontalWorkflow from "@/components/landing/HorizontalWorkflow";
 import TechnicalAccordion from "@/components/landing/TechnicalAccordion";
 import ScrollRevealCards from "@/components/landing/ScrollRevealCards";
+import StatCounters from "@/components/landing/StatCounters";
+import CodeTerminal from "@/components/landing/CodeTerminal";
+import FeatureToggle from "@/components/landing/FeatureToggle";
 
-function SplitTextContainer({ children, className = "" }: { children: string; className?: string }) {
+function SplitTextContainer({ children, className = "", style }: { children: string; className?: string; style?: React.CSSProperties }) {
   const words = children.split(" ");
   return (
-    <div className={`overflow-hidden flex flex-wrap gap-x-[0.3em] ${className}`}>
+    <div className={`overflow-hidden flex flex-wrap gap-x-[0.3em] ${className}`} style={style}>
       {words.map((word, i) => (
         <span key={i} className="split-word inline-block will-change-transform">
           {word}
@@ -222,6 +225,15 @@ export default function Home() {
 
       {/* ── Technical FAQ ── */}
       <TechnicalAccordion />
+
+      {/* ── Stat Counters (New Component 1) ── */}
+      <StatCounters />
+
+      {/* ── Code Terminal (New Component 2) ── */}
+      <CodeTerminal />
+
+      {/* ── Feature Toggle Cards (New Component 3) ── */}
+      <FeatureToggle />
 
       {/* ── Scroll Reveal Feature Cards ── */}
       <ScrollRevealCards />
